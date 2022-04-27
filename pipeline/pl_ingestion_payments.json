@@ -27,7 +27,7 @@
 						}
 					},
 					"dataset": {
-						"referenceName": "DS_Storage_Paymets",
+						"referenceName": "DS_Payment_Parametar",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -99,7 +99,17 @@
 				"inputs": [
 					{
 						"referenceName": "DS_Storage_Paymets",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"PaymentContainer": {
+								"value": "@activity('Lookup1').output.value",
+								"type": "Expression"
+							},
+							"PaymentRootFolder": {
+								"value": "@activity('Lookup1').output.value",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
