@@ -69,32 +69,7 @@
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['PaymentContainer']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['PaymentRootFolder']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SchemaName']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['IngestionTableName']"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -115,7 +90,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ingestion_Payments",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": {
+								"value": "@activity('Lookup1').output.firstRow.SchemaName",
+								"type": "Expression"
+							},
+							"IngestionTableName": {
+								"value": "@activity('Lookup1').output.firstRow.IngestionTableName\r\n",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
