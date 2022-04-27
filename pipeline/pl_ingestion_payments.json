@@ -75,7 +75,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "trunacte table mm.Payments",
+						"preCopyScript": "truncate table mm.Payments",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
