@@ -1,0 +1,30 @@
+{
+	"name": "ds_target_bank_statuses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "BankStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BankStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "ys",
+			"table": "BankStatuses"
+		}
+	}
+}
