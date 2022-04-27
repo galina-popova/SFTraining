@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "p_bank_statuses",
+				"name": "insert_bank_statuses",
+				"description": "truncate table ys.BankStatuses",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
