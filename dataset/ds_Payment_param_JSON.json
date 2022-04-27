@@ -9,6 +9,15 @@
 			"SchemaName": {
 				"type": "string",
 				"defaultValue": "nvl"
+			},
+			"PaymentContainer": {
+				"type": "string"
+			},
+			"PaymentRootFolder": {
+				"type": "string"
+			},
+			"IngestionTableName": {
+				"type": "string"
 			}
 		},
 		"folder": {
