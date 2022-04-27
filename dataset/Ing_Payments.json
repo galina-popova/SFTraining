@@ -78,7 +78,7 @@
 		],
 		"typeProperties": {
 			"schema": {
-				"value": "'gp'",
+				"value": "gp",
 				"type": "Expression"
 			},
 			"table": {
