@@ -44,9 +44,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "PaymentStatusId",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "BankStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -56,7 +56,7 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "PaymentStatusName",
+									"name": "BankStatusName",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
