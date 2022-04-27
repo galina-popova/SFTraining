@@ -26,6 +26,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sinkCurationBankStatuses1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_Curation_BankStatuses",
+						"type": "DatasetReference"
+					},
+					"name": "sinkBankStatuses2"
 				}
 			],
 			"transformations": [
@@ -37,6 +44,9 @@
 				},
 				{
 					"name": "splitBankStatuses"
+				},
+				{
+					"name": "UpdateBankStatuses"
 				}
 			],
 			"scriptLines": [
@@ -74,6 +84,7 @@
 				"selectBankStatuses split(isNull(CuBankStatusCode),",
 				"     and(IngBankStatusCode == CuBankStatusCode, IngBankStatusName != CuBankStatusName),",
 				"     disjoint: false) ~> splitBankStatuses@(InsertRows, UpdateRows, notChanged)",
+				"splitBankStatuses@UpdateRows alterRow(updateIf(true())) ~> UpdateBankStatuses",
 				"splitBankStatuses@InsertRows sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -88,7 +99,23 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sinkCurationBankStatuses1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkCurationBankStatuses1",
+				"UpdateBankStatuses sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['CuBankStatusCode'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBankStatuses2"
 			]
 		}
 	}
