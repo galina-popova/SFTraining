@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "IngPaymentStatuses",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
