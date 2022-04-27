@@ -52,8 +52,32 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "Json_Dynamic_file",
+						"type": "DatasetReference",
+						"parameters": {
+							"DS_P_container_name": {
+								"value": "@activity('ParamFile').output.firstrow",
+								"type": "Expression"
+							},
+							"Ds_P_schema_name": "gp"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
