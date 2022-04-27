@@ -1,0 +1,58 @@
+{
+	"name": "ds_target_CustomerDim",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "CustomerDimId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UniqueCustomerNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CustomerName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingPostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCountryName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "ys",
+			"table": "CustomerDim"
+		}
+	}
+}
