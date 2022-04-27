@@ -1,5 +1,5 @@
 {
-	"name": "pl_ingestion_copy_customer",
+	"name": "pl_ingestion_customer",
 	"properties": {
 		"activities": [
 			{
