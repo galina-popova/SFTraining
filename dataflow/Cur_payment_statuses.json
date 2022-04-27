@@ -17,6 +17,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CurPaymStat"
+				},
+				{
+					"dataset": {
+						"referenceName": "Ing_Bank_Statuses",
+						"type": "DatasetReference"
+					},
+					"name": "ingBankStatus"
 				}
 			],
 			"sinks": [
@@ -50,6 +57,15 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> CurPaymStat",
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> ingBankStatus",
 				"ingPaymStat, CurPaymStat exists(ingPaymStat@PaymentStatusName == CurPaymStat@PaymentStatusName,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> RecDoesnExists",
