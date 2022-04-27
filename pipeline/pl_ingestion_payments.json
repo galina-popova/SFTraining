@@ -30,7 +30,7 @@
 						"referenceName": "DS_Payment_Parametar",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
 				}
 			},
 			{
