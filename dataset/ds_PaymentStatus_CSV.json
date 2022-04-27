@@ -1,5 +1,5 @@
 {
-	"name": "PaymentStatus_CSV",
+	"name": "ds_PaymentStatus_CSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_datalake",
