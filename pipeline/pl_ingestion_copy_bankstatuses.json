@@ -16,9 +16,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
 					},
 					"sink": {
 						"type": "AzureSqlSink",
@@ -35,7 +41,7 @@
 								"source": {
 									"name": "BankStatusCode",
 									"type": "String",
-									"physicalType": "nvarchar"
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "BankStatusCode",
@@ -47,7 +53,7 @@
 								"source": {
 									"name": "BankStatusName",
 									"type": "String",
-									"physicalType": "nvarchar"
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "BankStatusName",
@@ -65,7 +71,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_ingestion_BankStatuses",
+						"referenceName": "DS_StorageBankStatuses",
 						"type": "DatasetReference"
 					}
 				],
