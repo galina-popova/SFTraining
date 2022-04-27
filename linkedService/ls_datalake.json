@@ -1,0 +1,19 @@
+{
+	"name": "ls_datalake",
+	"properties": {
+		"description": "Link to Azure Data Lak storage",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://sftrainingstorageaccount.dfs.core.windows.net/",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_secret_DL",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sftraining-storageAccount"
+			}
+		}
+	}
+}
