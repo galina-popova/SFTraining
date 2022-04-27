@@ -16,8 +16,14 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "PaymentStatus",
+				"type": "String"
+			}
+		]
 	}
 }
