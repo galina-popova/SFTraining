@@ -40,9 +40,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "CustomerDimId",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "UniqueCustomerNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
