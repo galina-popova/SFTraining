@@ -31,8 +31,75 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Get Params",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.windowStart",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@pipeline().parameters.windiwEnd",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_src_payments",
+						"type": "DatasetReference",
+						"parameters": {
+							"paymentsContainer": {
+								"value": "@activity('Get Params').output.firstRow.PaymentContainer",
+								"type": "Expression"
+							},
+							"paymentsRootFolder": {
+								"value": "@activity('Get Params').output.firstRow.PaymentRootFolder",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
+		"parameters": {
+			"windowStart": {
+				"type": "string"
+			},
+			"windiwEnd": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
