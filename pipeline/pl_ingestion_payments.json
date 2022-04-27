@@ -102,7 +102,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"PaymentContainer": {
-								"value": "@activity('Lookup1').output.value",
+								"value": "@activity('Lookup1').output.firstRow.PaymentContainer",
 								"type": "Expression"
 							},
 							"PaymentRootFolder": {
