@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sourceIngestionBankStatuses"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_Curation_BankStatuses",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCurationBankStatus"
 				}
 			],
 			"sinks": [
@@ -23,7 +30,13 @@
 			],
 			"transformations": [
 				{
-					"name": "alterRow1"
+					"name": "joinBankStatus"
+				},
+				{
+					"name": "selectBankStatuses"
+				},
+				{
+					"name": "derivedBankStatuses"
 				}
 			],
 			"scriptLines": [
@@ -36,8 +49,30 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sourceIngestionBankStatuses",
-				"sourceIngestionBankStatuses alterRow(updateIf(true())) ~> alterRow1",
-				"alterRow1 sink(allowSchemaDrift: true,",
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceCurationBankStatus",
+				"sourceIngestionBankStatuses, sourceCurationBankStatus join(sourceIngestionBankStatuses@BankStatusName == sourceCurationBankStatus@BankStatusName,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinBankStatus",
+				"joinBankStatus select(mapColumn(",
+				"          IngBankStatusId = sourceIngestionBankStatuses@BankStatusId,",
+				"          IngBankStatusCode = sourceIngestionBankStatuses@BankStatusCode,",
+				"          IngBankStatusName = sourceIngestionBankStatuses@BankStatusName,",
+				"          CuBankStatusId = sourceCurationBankStatus@BankStatusId,",
+				"          CuBankStatusCode = sourceCurationBankStatus@BankStatusCode,",
+				"          CuBankStatusName = sourceCurationBankStatus@BankStatusName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectBankStatuses",
+				"selectBankStatuses derive(Insert = iifNull(CuBankStatusCode)) ~> derivedBankStatuses",
+				"derivedBankStatuses sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          BankStatusId as integer,",
@@ -52,8 +87,8 @@
 				"     format: 'table',",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          BankStatusCode,",
-				"          BankStatusName",
+				"          BankStatusCode = IngBankStatusCode,",
+				"          BankStatusName = IngBankStatusName",
 				"     )) ~> sinkCurationBankStatuses"
 			]
 		}
