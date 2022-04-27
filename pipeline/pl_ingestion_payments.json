@@ -207,7 +207,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schemaName": {
-								"value": "@activity('get_params').output.firstRow.SchameName",
+								"value": "@activity('get_params').output.firstRow.SchemaName",
 								"type": "Expression"
 							},
 							"tableName": {
