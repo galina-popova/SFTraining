@@ -168,7 +168,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schemaName": {
-								"value": "@activity('get_params').output.firstRow.SchemaName",
+								"value": "@activity('get_params').output.firstRow.schemaName",
 								"type": "Expression"
 							},
 							"tableName": {
