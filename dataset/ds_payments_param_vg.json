@@ -1,0 +1,36 @@
+{
+	"name": "ds_payments_param_vg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vg_AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "copyParams.json",
+				"folderPath": "payments/parameters",
+				"fileSystem": "payments"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"PaymentContainer": {
+					"type": "string"
+				},
+				"PaymentRootFolder": {
+					"type": "string"
+				},
+				"SchemaName": {
+					"type": "string"
+				},
+				"IngestionTableName": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
