@@ -158,7 +158,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ingestion_Customerdim",
+						"referenceName": "DS_ingestion_CustomerDim",
 						"type": "DatasetReference"
 					}
 				]
