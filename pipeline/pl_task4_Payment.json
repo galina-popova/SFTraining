@@ -1,0 +1,202 @@
+{
+	"name": "pl_task4_Payment",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get_Payment_params",
+				"description": "Get parameters to copy correct data",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_Payment_param_JSON",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Payment JSON-to-DB",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Get_Payment_params",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['EnqueuedTimeUtc']"
+								},
+								"sink": {
+									"name": "EnqueuedTimeUtc",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Properties']"
+								},
+								"sink": {
+									"name": "Properties",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_identifier']"
+								},
+								"sink": {
+									"name": "PaymentIdentifier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['unique_customer_number']"
+								},
+								"sink": {
+									"name": "UniqueCustomerNumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['bank_status_code']"
+								},
+								"sink": {
+									"name": "BankStatusCode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_status_name']"
+								},
+								"sink": {
+									"name": "PaymentStatusName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_amount']"
+								},
+								"sink": {
+									"name": "PaymentAmount",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['deduction']"
+								},
+								"sink": {
+									"name": "Deduction",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_date']"
+								},
+								"sink": {
+									"name": "PaymentDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']"
+								},
+								"sink": {
+									"name": "SystemProperties",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_Payment_JSON",
+						"type": "DatasetReference",
+						"parameters": {
+							"paymentContainer": {
+								"value": "@activity('Get_Payment_params').output.firstRow.PaymentContainer",
+								"type": "Expression"
+							},
+							"paymentFolder": {
+								"value": "@activity('Get_Payment_params').output.firstRow.PaymentRootFolder",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Payment_Table",
+						"type": "DatasetReference",
+						"parameters": {
+							"dbSchema": "nvl",
+							"dbTable": {
+								"value": "@activity('Get_Payment_params').output.firstRow.IngestionTableName",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
