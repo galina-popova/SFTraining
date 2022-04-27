@@ -19,7 +19,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "drr",
+			"schema": "dg",
 			"table": "BankStatuses"
 		}
 	}
