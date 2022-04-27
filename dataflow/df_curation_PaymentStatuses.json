@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "df_curation_PaymentStatuses",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -12,7 +12,15 @@
 					"name": "sourceIngestionPaymentStatuses"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Curation_PaymentStatuses",
+						"type": "DatasetReference"
+					},
+					"name": "curationPaymentStatuses"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
@@ -22,7 +30,24 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sourceIngestionPaymentStatuses"
+				"     format: 'table') ~> sourceIngestionPaymentStatuses",
+				"sourceIngestionPaymentStatuses sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PaymentStatusName",
+				"     )) ~> curationPaymentStatuses"
 			]
 		}
 	}
