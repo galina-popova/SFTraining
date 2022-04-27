@@ -95,15 +95,6 @@
 							},
 							{
 								"source": {
-									"path": "$['Properties']"
-								},
-								"sink": {
-									"name": "Properties",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['SystemProperties']"
 								},
 								"sink": {
