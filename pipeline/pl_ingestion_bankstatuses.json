@@ -1,5 +1,5 @@
 {
-	"name": "pl_ingestion_copy_bankstatuses",
+	"name": "pl_ingestion_bankstatuses",
 	"properties": {
 		"activities": [
 			{
