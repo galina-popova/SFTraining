@@ -1,5 +1,5 @@
 {
-	"name": "Cur_payment_statuses",
+	"name": "Cur_payment_bank_statuses",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
