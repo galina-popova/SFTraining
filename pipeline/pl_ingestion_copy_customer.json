@@ -16,14 +16,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "ExcelSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
 							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -36,32 +33,6 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "BankStatusCode",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "BankStatusCode",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "BankStatusName",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "BankStatusName",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							}
-						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -71,13 +42,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_StorageBankStatuses",
+						"referenceName": "DS_StorageCustomer",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ingestion_BankStatuses",
+						"referenceName": "DS_ingestion_Customerdim",
 						"type": "DatasetReference"
 					}
 				]
