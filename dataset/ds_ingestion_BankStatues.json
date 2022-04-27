@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "ds_ingestion_BankStatues",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sftraining_ingestion_db",
