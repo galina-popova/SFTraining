@@ -45,7 +45,7 @@
 				"          BankStatusName as string",
 				"     ),",
 				"     deletable:false,",
-				"     insertable:false,",
+				"     insertable:true,",
 				"     updateable:true,",
 				"     upsertable:false,",
 				"     keys:['BankStatusName'],",
