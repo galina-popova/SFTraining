@@ -1,0 +1,30 @@
+{
+	"name": "Ing_Bank_Statuses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlIngestion",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BankStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BankStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gp",
+			"table": "BankStatuses"
+		}
+	}
+}
