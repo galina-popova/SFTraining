@@ -1,5 +1,5 @@
 {
-	"name": "pl_ONGEST_PAYMENT_STATUES",
+	"name": "pl_INGEST_PAYMENT_STATUES",
 	"properties": {
 		"activities": [
 			{
@@ -44,9 +44,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "PaymentStatusId",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "PaymentStatusName",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							}
 						],
