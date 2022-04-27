@@ -1,0 +1,24 @@
+{
+	"name": "DS_StorageCustomer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftraning_storage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Storage"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Customers.xlsx",
+				"folderPath": "customerdim/raw",
+				"fileSystem": "dimensions"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
