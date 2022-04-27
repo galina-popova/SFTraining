@@ -93,7 +93,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": {
-								"value": "@activity('Lookup1').output.firstRow.SchemaName",
+								"value": "mm",
 								"type": "Expression"
 							},
 							"IngestionTableName": {
