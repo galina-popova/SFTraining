@@ -1,0 +1,10 @@
+{
+	"name": "vg_AzureDataLakeStorage2",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://sftrainingstorageaccount.dfs.core.windows.net"
+		}
+	}
+}
