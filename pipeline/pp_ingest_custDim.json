@@ -53,18 +53,6 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "UniqueCustomerNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "CustomerName",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
 									"name": "CustomerName",
 									"type": "String",
 									"physicalType": "nvarchar"
