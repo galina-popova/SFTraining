@@ -1,5 +1,5 @@
 {
-	"name": "pl_ingestion_copy_csv",
+	"name": "pl_ingestion_copy_paymentstatuses",
 	"properties": {
 		"activities": [
 			{
