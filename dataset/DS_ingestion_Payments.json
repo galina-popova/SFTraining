@@ -5,6 +5,14 @@
 			"referenceName": "ls_ingestion_database",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"SchemaName": {
+				"type": "string"
+			},
+			"IngestionTableName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Ingestion"
 		},
