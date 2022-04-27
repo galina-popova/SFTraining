@@ -171,18 +171,10 @@
 									"name": "PaymentDate",
 									"type": "DateTime"
 								}
-							},
-							{
-								"source": {
-									"path": "CreatedOn"
-								},
-								"sink": {
-									"name": "CreatedOn",
-									"type": "DateTime"
-								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
