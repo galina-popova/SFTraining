@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "ing_pmntSt",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureSqlDatabase",
