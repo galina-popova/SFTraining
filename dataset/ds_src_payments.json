@@ -1,0 +1,86 @@
+{
+	"name": "ds_src_payments",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sf_training_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"paymentsContainer": {
+				"type": "string"
+			},
+			"paymentsRootFolder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "@dataset().paymentsRootFolder",
+				"fileSystem": "@dataset().paymentsContainer"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"EnqueuedTimeUtc": {
+					"type": "string"
+				},
+				"Properties": {
+					"type": "object"
+				},
+				"SystemProperties": {
+					"type": "object",
+					"properties": {
+						"connectionDeviceId": {
+							"type": "string"
+						},
+						"connectionAuthMethod": {
+							"type": "string"
+						},
+						"connectionDeviceGenerationId": {
+							"type": "string"
+						},
+						"contentType": {
+							"type": "string"
+						},
+						"contentEncoding": {
+							"type": "string"
+						},
+						"enqueuedTime": {
+							"type": "string"
+						}
+					}
+				},
+				"Body": {
+					"type": "object",
+					"properties": {
+						"payment_identifier": {
+							"type": "string"
+						},
+						"unique_customer_number": {
+							"type": "integer"
+						},
+						"bank_status_code": {
+							"type": "string"
+						},
+						"payment_status_name": {
+							"type": "string"
+						},
+						"payment_amount": {
+							"type": "number"
+						},
+						"deduction": {
+							"type": "number"
+						},
+						"payment_date": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}
