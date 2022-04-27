@@ -1,6 +1,94 @@
 {
-	"name": "pipeline1",
+	"name": "p_task1",
 	"properties": {
+		"activities": [
+			{
+				"name": "Insert_Payment_Statuses",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "id",
+								"value": {
+									"value": "uuid()",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PaymentStatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PaymentStatusName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PaymentStatusId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_payment_statuses",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_target_payment_statuses",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
 		"annotations": []
 	}
 }
