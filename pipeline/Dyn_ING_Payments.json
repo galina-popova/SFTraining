@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "Dyn_ING_Payments",
 	"properties": {
 		"activities": [
 			{
@@ -33,7 +33,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "IngestPayments",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -80,6 +80,14 @@
 				]
 			}
 		],
+		"parameters": {
+			"WindowStart": {
+				"type": "string"
+			},
+			"WindowEnd": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
