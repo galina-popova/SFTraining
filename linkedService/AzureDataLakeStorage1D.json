@@ -1,0 +1,18 @@
+{
+	"name": "AzureDataLakeStorage1D",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://sftrainingstorageaccount.dfs.core.windows.net/",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1D",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sftraining-storageAccount"
+			}
+		}
+	}
+}
