@@ -5,6 +5,9 @@
 			"referenceName": "AzureSqlIngestion",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Igestion"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
