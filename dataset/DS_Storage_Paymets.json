@@ -31,22 +31,6 @@
 				}
 			}
 		},
-		"schema": {
-			"type": "object",
-			"properties": {
-				"PaymentContainer": {
-					"type": "string"
-				},
-				"PaymentRootFolder": {
-					"type": "string"
-				},
-				"SchemaName": {
-					"type": "string"
-				},
-				"IngestionTableName": {
-					"type": "string"
-				}
-			}
-		}
+		"schema": {}
 	}
 }
