@@ -1,0 +1,16 @@
+{
+	"name": "ds_ingestion_customers",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftraining_ingestion_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "tp",
+			"table": "CustomerDim"
+		}
+	}
+}
