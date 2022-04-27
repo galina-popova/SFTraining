@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_pmntSt",
+				"name": "Copy-PmntSt",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"enablePartitionDiscovery": true
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -39,13 +39,12 @@
 						"mappings": [
 							{
 								"source": {
-									"type": "String",
 									"ordinal": 1
 								},
 								"sink": {
 									"name": "PaymentStatusId",
-									"type": "Int32",
-									"physicalType": "int"
+									"physicalType": "int",
+									"precision": 10
 								}
 							}
 						],
