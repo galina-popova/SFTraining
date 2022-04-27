@@ -1,5 +1,5 @@
 {
-	"name": "ds_param_dyn",
+	"name": "ds_payments_params",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage",
@@ -26,7 +26,10 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "copyParams.json",
+				"folderPath": "payments/parameters",
+				"container": "payments"
 			}
 		},
 		"schema": {}
