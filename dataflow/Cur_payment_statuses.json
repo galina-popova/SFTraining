@@ -40,6 +40,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CurPaymStatusesInsertNew"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_cur_bankStauses",
+						"type": "DatasetReference"
+					},
+					"name": "CurNewrows"
 				}
 			],
 			"transformations": [
@@ -126,7 +133,22 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          PaymentStatusName",
-				"     )) ~> CurPaymStatusesInsertNew"
+				"     )) ~> CurPaymStatusesInsertNew",
+				"splitNewUpd@New sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> CurNewrows"
 			]
 		}
 	}
