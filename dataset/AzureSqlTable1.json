@@ -1,0 +1,30 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "curationDB_AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BankStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BankStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dg",
+			"table": "PaymentStatuses"
+		}
+	}
+}
