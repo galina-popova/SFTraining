@@ -75,7 +75,10 @@
 		],
 		"typeProperties": {
 			"schema": "anb",
-			"table": "Payments"
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
