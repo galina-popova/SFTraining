@@ -19,7 +19,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "am",
+			"schema": "gp",
 			"table": "PaymentStatuses"
 		}
 	}
