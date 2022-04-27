@@ -1,0 +1,20 @@
+{
+	"name": "ds_payment_params",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sf_training_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "copyParams.json",
+				"folderPath": "payments/parameters",
+				"fileSystem": "payments"
+			}
+		},
+		"schema": {}
+	}
+}
