@@ -1,0 +1,61 @@
+{
+	"name": "DS_ingestion_customerdim",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_ingestion_database",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ingestion"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CustomerDimId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UniqueCustomerNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CustomerName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingPostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCountryName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "mm",
+			"table": "CustomerDim"
+		}
+	}
+}
