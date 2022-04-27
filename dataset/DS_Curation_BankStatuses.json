@@ -1,0 +1,33 @@
+{
+	"name": "DS_Curation_BankStatuses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Is_curation_DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Curation"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BankStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BankStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "mm",
+			"table": "BankStatuses"
+		}
+	}
+}
