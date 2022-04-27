@@ -5,6 +5,9 @@
 			"referenceName": "sf_training_datalake",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "ingestion"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
