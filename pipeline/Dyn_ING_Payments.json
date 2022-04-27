@@ -65,11 +65,17 @@
 								"value": "@pipeline().parameters.WindowEnd",
 								"type": "Expression"
 							},
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "JsonReadSettings"
 						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false
 				},
@@ -83,6 +89,19 @@
 								"type": "Expression"
 							},
 							"DS_P_root_folder_name": "@activity('ParamFile').output.firstRow.PaymentRootFolder"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Ing_Payments",
+						"type": "DatasetReference",
+						"parameters": {
+							"ShemaName": {
+								"value": "@activity('ParamFile').output.firstRow.SchemaName",
+								"type": "Expression"
+							},
+							"TableName": "@activity('ParamFile').output.firstRow.IngestionTableName"
 						}
 					}
 				]
