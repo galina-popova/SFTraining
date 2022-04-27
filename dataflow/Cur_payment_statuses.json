@@ -1,0 +1,51 @@
+{
+	"name": "Cur_payment_statuses",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ING_paymentStatuses",
+						"type": "DatasetReference"
+					},
+					"name": "ingPaymStat"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_cur_paymentStauses",
+						"type": "DatasetReference"
+					},
+					"name": "CurPaymStat"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "RecDoesnExists"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> ingPaymStat",
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurPaymStat",
+				"ingPaymStat, CurPaymStat exists(ingPaymStat@PaymentStatusName == CurPaymStat@PaymentStatusName,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> RecDoesnExists"
+			]
+		}
+	}
+}
