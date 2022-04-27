@@ -1,5 +1,5 @@
 {
-	"name": "pp_BankStatuses",
+	"name": "pp_ingest_BankStatuses",
 	"properties": {
 		"activities": [
 			{
