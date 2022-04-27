@@ -63,8 +63,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dg",
-			"table": "Payments"
+			"schema": {
+				"value": "@dataset().Schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().Table",
+				"type": "Expression"
+			}
 		}
 	}
 }
