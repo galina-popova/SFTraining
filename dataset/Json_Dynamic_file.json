@@ -11,6 +11,13 @@
 			},
 			"DS_P_root_folder_name": {
 				"type": "string"
+			},
+			"Ds_P_schema_name": {
+				"type": "string",
+				"defaultValue": "gp"
+			},
+			"DS_P_table_name": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
