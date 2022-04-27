@@ -1,0 +1,61 @@
+{
+	"name": "df_curation_BankStatuses",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_ingestion_BankStatuses",
+						"type": "DatasetReference"
+					},
+					"name": "sourceIngestionBankStatuses"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Curation_BankStatuses",
+						"type": "DatasetReference"
+					},
+					"name": "sinkCurationBankStatuses"
+				}
+			],
+			"transformations": [
+				{
+					"name": "alterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceIngestionBankStatuses",
+				"sourceIngestionBankStatuses alterRow(updateIf(true())) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['BankStatusCode'],",
+				"     format: 'table',",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          BankStatusCode,",
+				"          BankStatusName",
+				"     )) ~> sinkCurationBankStatuses"
+			]
+		}
+	}
+}
