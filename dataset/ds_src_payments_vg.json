@@ -18,8 +18,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "payments/raw",
-				"fileSystem": "payments"
+				"folderPath": "@dataset().paymentsRootFolderVg",
+				"fileSystem": "@dataset().paymentsContainerVg"
 			}
 		},
 		"schema": {
