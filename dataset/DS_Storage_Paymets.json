@@ -1,0 +1,39 @@
+{
+	"name": "DS_Storage_Paymets",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftraning_storage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Storage"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "copyParams.json",
+				"folderPath": "payments/parameters",
+				"fileSystem": "payments"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"PaymentContainer": {
+					"type": "string"
+				},
+				"PaymentRootFolder": {
+					"type": "string"
+				},
+				"SchemaName": {
+					"type": "string"
+				},
+				"IngestionTableName": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
