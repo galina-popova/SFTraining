@@ -31,7 +31,87 @@
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['EnqueuedTimeUtc']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Properties']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']['connectionDeviceId']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']['connectionAuthMethod']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']['connectionDeviceGenerationId']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']['contentType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']['contentEncoding']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['SystemProperties']['enqueuedTime']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_identifier']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['unique_customer_number']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['bank_status_code']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_status_name']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_amount']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['deduction']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_date']"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
