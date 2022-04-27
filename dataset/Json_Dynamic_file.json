@@ -1,0 +1,79 @@
+{
+	"name": "Json_Dynamic_file",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "2022-04-26-01-00.json",
+				"folderPath": "payments/raw",
+				"fileSystem": "payments"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"EnqueuedTimeUtc": {
+					"type": "string"
+				},
+				"Properties": {
+					"type": "object"
+				},
+				"SystemProperties": {
+					"type": "object",
+					"properties": {
+						"connectionDeviceId": {
+							"type": "string"
+						},
+						"connectionAuthMethod": {
+							"type": "string"
+						},
+						"connectionDeviceGenerationId": {
+							"type": "string"
+						},
+						"contentType": {
+							"type": "string"
+						},
+						"contentEncoding": {
+							"type": "string"
+						},
+						"enqueuedTime": {
+							"type": "string"
+						}
+					}
+				},
+				"Body": {
+					"type": "object",
+					"properties": {
+						"payment_identifier": {
+							"type": "string"
+						},
+						"unique_customer_number": {
+							"type": "integer"
+						},
+						"bank_status_code": {
+							"type": "string"
+						},
+						"payment_status_name": {
+							"type": "string"
+						},
+						"payment_amount": {
+							"type": "number"
+						},
+						"deduction": {
+							"type": "number"
+						},
+						"payment_date": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}
