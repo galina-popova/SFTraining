@@ -80,8 +80,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "mm",
-			"table": "Payments"
+			"schema": {
+				"value": "@dataset().SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().IngestionTableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
