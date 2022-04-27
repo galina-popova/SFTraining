@@ -206,7 +206,6 @@
 						"referenceName": "ds_ingestion_payments",
 						"type": "DatasetReference",
 						"parameters": {
-							"schemaName": "anb",
 							"tableName": {
 								"value": "@activity('get_params').output.firstRow.IngestionTableName",
 								"type": "Expression"

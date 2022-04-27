@@ -6,9 +6,6 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"schemaName": {
-				"type": "string"
-			},
 			"tableName": {
 				"type": "string"
 			}
@@ -78,10 +75,7 @@
 		],
 		"typeProperties": {
 			"schema": "anb",
-			"table": {
-				"value": "@dataset().tableName",
-				"type": "Expression"
-			}
+			"table": "Payments"
 		}
 	}
 }
