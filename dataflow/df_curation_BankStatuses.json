@@ -115,13 +115,14 @@
 				"     insertable:false,",
 				"     updateable:true,",
 				"     upsertable:false,",
-				"     keys:['CuBankStatusCode'],",
+				"     keys:['BankStatusCode'],",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          BankStatusName = IngBankStatusName",
+				"          BankStatusName = IngBankStatusName,",
+				"          BankStatusCode = IngBankStatusCode",
 				"     )) ~> sinkBankStatuses2"
 			]
 		}
