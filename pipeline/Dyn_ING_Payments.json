@@ -54,6 +54,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "CreatedOn",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
@@ -156,7 +165,15 @@
 							},
 							{
 								"source": {
-									"path": "$['CreatedOn']"
+									"path": "$['SystemProperties']"
+								},
+								"sink": {
+									"name": "SystemProperties"
+								}
+							},
+							{
+								"source": {
+									"path": "CreatedOn"
 								},
 								"sink": {
 									"name": "CreatedOn"
