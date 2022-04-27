@@ -39,12 +39,11 @@
 						"mappings": [
 							{
 								"source": {
-									"ordinal": 1
+									"name": "PaymentStatus"
 								},
 								"sink": {
-									"name": "PaymentStatusId",
-									"physicalType": "int",
-									"precision": 10
+									"name": "PaymentStatusName",
+									"physicalType": "nvarchar"
 								}
 							}
 						],
