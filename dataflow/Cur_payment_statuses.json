@@ -24,6 +24,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "ingBankStatus"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_cur_bankStauses",
+						"type": "DatasetReference"
+					},
+					"name": "CurBankStatus"
 				}
 			],
 			"sinks": [
@@ -38,6 +45,12 @@
 			"transformations": [
 				{
 					"name": "RecDoesnExists"
+				},
+				{
+					"name": "BSIngJoinCur"
+				},
+				{
+					"name": "renameCols"
 				}
 			],
 			"scriptLines": [
@@ -66,9 +79,31 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> ingBankStatus",
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurBankStatus",
 				"ingPaymStat, CurPaymStat exists(ingPaymStat@PaymentStatusName == CurPaymStat@PaymentStatusName,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> RecDoesnExists",
+				"ingBankStatus, CurBankStatus join(ingBankStatus@BankStatusCode == CurBankStatus@BankStatusCode,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> BSIngJoinCur",
+				"BSIngJoinCur select(mapColumn(",
+				"          ING_BankStatusId = ingBankStatus@BankStatusId,",
+				"          ING_BankStatusCode = ingBankStatus@BankStatusCode,",
+				"          ING_BankStatusName = ingBankStatus@BankStatusName,",
+				"          CUR_BankStatusId = CurBankStatus@BankStatusId,",
+				"          CUR_BankStatusCode = CurBankStatus@BankStatusCode,",
+				"          CUR_BankStatusName = CurBankStatus@BankStatusName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> renameCols",
 				"RecDoesnExists sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
