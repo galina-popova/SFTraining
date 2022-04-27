@@ -1,0 +1,33 @@
+{
+	"name": "ds_BankStatus_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_database",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ingestion"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BankStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BankStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nvl",
+			"table": "BankStatuses"
+		}
+	}
+}
