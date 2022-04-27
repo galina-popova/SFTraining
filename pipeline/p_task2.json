@@ -35,6 +35,32 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "BankStatusCode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BankStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BankStatusName",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BankStatusName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
