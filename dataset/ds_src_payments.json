@@ -7,10 +7,12 @@
 		},
 		"parameters": {
 			"paymentsContainer": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "payments"
 			},
 			"paymentsRootFolder": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "/payments/raw"
 			}
 		},
 		"annotations": [],
