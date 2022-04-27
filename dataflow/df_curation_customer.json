@@ -19,7 +19,15 @@
 					"name": "sourceCurationCustomer"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Curation_CustomerDim",
+						"type": "DatasetReference"
+					},
+					"name": "sinkCurationCustomer"
+				}
+			],
 			"transformations": [
 				{
 					"name": "joinCustomer"
@@ -29,6 +37,9 @@
 				},
 				{
 					"name": "splitCustomer"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -47,7 +58,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sourceIngCustomer",
+				"     query: '',",
+				"     format: 'query') ~> sourceIngCustomer",
 				"source(output(",
 				"          CustomerDimId as integer,",
 				"          UniqueCustomerNumber as string,",
@@ -91,9 +103,51 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectBankStatuses",
-				"selectBankStatuses split(ERROR_FUNCTION(''),",
+				"selectBankStatuses split(isNull(CurUniqueCustomerNumber),",
 				"     ERROR_FUNCTION(''),",
-				"     disjoint: false) ~> splitCustomer@(InsertRows, UpdateRows, NoChange)"
+				"     disjoint: true) ~> splitCustomer@(InsertRows, UpdateRows, NoChange)",
+				"splitCustomer@InsertRows derive(ValidFrom = currentTimestamp(),",
+				"          ValidTo = toTimestamp('3000-01-01 00:00:00', 'yyyy-MM-dd hh:mm:ss'),",
+				"          IsActive = 1) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string,",
+				"          ValidFrom as timestamp,",
+				"          ValidTo as timestamp,",
+				"          IsActive as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          UniqueCustomerNumber = IngUniqueCustomerNumber,",
+				"          CustomerName = IngCustomerName,",
+				"          Phone = IngPhone,",
+				"          Email = IngEmail,",
+				"          BillingAddress = IngBillingAddress,",
+				"          BillingCity = IngBillingCity,",
+				"          BillingPostalCode = IngBillingPostalCode,",
+				"          BillingState = IngBillingState,",
+				"          BillingCountryName = IngBillingCountryName,",
+				"          ValidFrom,",
+				"          ValidTo,",
+				"          IsActive",
+				"     )) ~> sinkCurationCustomer"
 			]
 		}
 	}
