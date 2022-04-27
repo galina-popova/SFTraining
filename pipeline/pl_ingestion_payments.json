@@ -29,7 +29,8 @@
 					"dataset": {
 						"referenceName": "DS_Storage_Paymets",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
