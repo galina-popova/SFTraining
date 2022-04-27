@@ -114,6 +114,10 @@
 							{
 								"source": {
 									"path": "$['BankStatusName']"
+								},
+								"sink": {
+									"name": "BankStatusCode",
+									"type": "String"
 								}
 							},
 							{
