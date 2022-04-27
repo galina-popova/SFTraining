@@ -57,7 +57,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"modifiedDatetimeStart": "2022-04-27T00:00:00.000Z",
 							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
@@ -77,7 +76,64 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$"
+									"path": "$['EnqueuedTimeUtc']"
+								},
+								"sink": {
+									"name": "EnqueuedTimeUtc",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Properties']"
+								},
+								"sink": {
+									"name": "Properties",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_identifier']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['unique_customer_number']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['bank_status_code']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_status_name']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_amount']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['deduction']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Body']['payment_date']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['$[\\'SystemProperties\\']']"
+								},
+								"sink": {
+									"name": "SystemProperties",
+									"type": "String"
 								}
 							}
 						],
