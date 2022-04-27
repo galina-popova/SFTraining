@@ -80,75 +80,7 @@
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['PaymentId']"
-								},
-								"sink": {
-									"name": "PaymentId",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['PaymentIdentifier']"
-								},
-								"sink": {
-									"name": "PaymentIdentifier",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['UniqueCustomerNumber']"
-								},
-								"sink": {
-									"name": "UniqueCustomerNumber",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['BankStatusName']"
-								},
-								"sink": {
-									"name": "BankStatusCode",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['PaymentStatusName']"
-								},
-								"sink": {
-									"name": "PaymentStatusName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['PaymentAmount']"
-								},
-								"sink": {
-									"name": "PaymentAmount",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"path": "$['PaymentDate']"
-								},
-								"sink": {
-									"name": "PaymentDate",
-									"type": "DateTime"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
