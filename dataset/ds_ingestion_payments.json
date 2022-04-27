@@ -77,10 +77,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": {
-				"value": "@dataset().schemaName",
-				"type": "Expression"
-			},
+			"schema": "anb",
 			"table": {
 				"value": "@dataset().tableName",
 				"type": "Expression"
