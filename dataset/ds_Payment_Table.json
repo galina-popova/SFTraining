@@ -1,0 +1,34 @@
+{
+	"name": "ds_Payment_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_database",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"dbSchema": {
+				"type": "string",
+				"defaultValue": "nvl"
+			},
+			"dbTable": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "ingestion"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().dbSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().dbTable",
+				"type": "Expression"
+			}
+		}
+	}
+}
