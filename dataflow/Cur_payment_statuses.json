@@ -19,7 +19,15 @@
 					"name": "CurPaymStat"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_cur_paymentStauses",
+						"type": "DatasetReference"
+					},
+					"name": "CurPaymStatusesInsertNew"
+				}
+			],
 			"transformations": [
 				{
 					"name": "RecDoesnExists"
@@ -44,7 +52,21 @@
 				"     format: 'table') ~> CurPaymStat",
 				"ingPaymStat, CurPaymStat exists(ingPaymStat@PaymentStatusName == CurPaymStat@PaymentStatusName,",
 				"     negate:true,",
-				"     broadcast: 'auto')~> RecDoesnExists"
+				"     broadcast: 'auto')~> RecDoesnExists",
+				"RecDoesnExists sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> CurPaymStatusesInsertNew"
 			]
 		}
 	}
