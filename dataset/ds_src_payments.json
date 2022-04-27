@@ -18,9 +18,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "payments.json",
-				"folderPath": "payments/ingestion",
-				"fileSystem": "payments"
+				"fileName": {
+					"value": "file",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().paymentsRootFolder",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().paymentsContainer",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
