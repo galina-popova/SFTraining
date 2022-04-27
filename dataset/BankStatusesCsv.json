@@ -16,13 +16,16 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "BankStatusCode",
 				"type": "String"
 			},
 			{
+				"name": "BankStatusName",
 				"type": "String"
 			}
 		]
