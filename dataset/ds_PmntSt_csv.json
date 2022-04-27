@@ -1,9 +1,12 @@
 {
-	"name": "PmntSt",
+	"name": "ds_PmntSt_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Files"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
