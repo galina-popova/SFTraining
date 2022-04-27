@@ -1,0 +1,62 @@
+{
+	"name": "cust_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Files"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Customers",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Customers.xlsx",
+				"folderPath": "customerdim/raw",
+				"container": "dimensions"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "UniqueCustomerNumber",
+				"type": "String"
+			},
+			{
+				"name": "CustomerName",
+				"type": "String"
+			},
+			{
+				"name": "Phone",
+				"type": "String"
+			},
+			{
+				"name": "Email",
+				"type": "String"
+			},
+			{
+				"name": "BillingAddress",
+				"type": "String"
+			},
+			{
+				"name": "BillingCity",
+				"type": "String"
+			},
+			{
+				"name": "BillingPostalCode",
+				"type": "String"
+			},
+			{
+				"name": "BillingState",
+				"type": "String"
+			},
+			{
+				"name": "BillingCountryName",
+				"type": "String"
+			}
+		]
+	}
+}
