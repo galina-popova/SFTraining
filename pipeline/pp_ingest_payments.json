@@ -52,8 +52,29 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_ingestion_payments",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": {
+								"value": "@activity('get_params').output.firstRow.PaymentContainer",
+								"type": "Expression"
+							},
+							"tableName": {
+								"value": "@activity('get_params').output.firstRow.PaymentRootFolder",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
