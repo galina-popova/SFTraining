@@ -1,5 +1,5 @@
 {
-	"name": "StoragePayments",
+	"name": "DS_StoragePayments",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sftraning_storage",
