@@ -78,7 +78,11 @@
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mapComplexValuesToString": true
+					}
 				},
 				"inputs": [
 					{
