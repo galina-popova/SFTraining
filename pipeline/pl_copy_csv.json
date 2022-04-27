@@ -38,6 +38,11 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
+								"source": {
+									"name": "PaymentStatus",
+									"type": "String",
+									"physicalType": "String"
+								},
 								"sink": {
 									"name": "PaymentStatusName",
 									"type": "String",
