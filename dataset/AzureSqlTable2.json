@@ -1,0 +1,30 @@
+{
+	"name": "AzureSqlTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vg_linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"schemaNameVg": {
+				"type": "string"
+			},
+			"tableNameVg": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schemaNameVg",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tableNameVg",
+				"type": "Expression"
+			}
+		}
+	}
+}
