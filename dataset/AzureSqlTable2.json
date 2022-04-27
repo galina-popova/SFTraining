@@ -19,8 +19,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dg",
-			"table": "PaymentStatuses"
+			"schema": "drr",
+			"table": "BankStatuses"
 		}
 	}
 }
