@@ -104,32 +104,11 @@
 							},
 							{
 								"source": {
-									"path": "$['SystemProperties']['connectionDeviceId']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['connectionAuthMethod']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['connectionDeviceGenerationId']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['contentType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['contentEncoding']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['enqueuedTime']"
+									"path": "$['SystemProperties']"
+								},
+								"sink": {
+									"name": "SystemProperties",
+									"type": "String"
 								}
 							},
 							{
