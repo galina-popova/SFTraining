@@ -5,6 +5,14 @@
 			"referenceName": "vg_AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"paymentsContainerVg": {
+				"type": "string"
+			},
+			"paymentsRootFolderVg": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
