@@ -14,7 +14,8 @@
 				"fileName": "Customers.xlsx",
 				"folderPath": "customerdim/raw",
 				"container": "dimensions"
-			}
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
