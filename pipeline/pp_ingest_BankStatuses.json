@@ -28,8 +28,10 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table drr.BankStatuses",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
