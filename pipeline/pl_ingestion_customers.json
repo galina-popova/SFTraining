@@ -25,6 +25,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table anb.CustomerDim",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
