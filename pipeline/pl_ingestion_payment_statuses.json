@@ -36,6 +36,20 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PaymentStatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PaymentStatusName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
