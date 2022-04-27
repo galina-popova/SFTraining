@@ -1,0 +1,53 @@
+{
+	"name": "ds_src_payments",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"paymentsContainer": {
+				"type": "string"
+			},
+			"paymentsRootFolder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "payments.json",
+				"folderPath": "payments/ingestion",
+				"fileSystem": "payments"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"PaymentId": {
+					"type": "integer"
+				},
+				"PaymentIdentifier": {
+					"type": "integer"
+				},
+				"UniqueCustomerNumber": {
+					"type": "integer"
+				},
+				"BankStatusName": {
+					"type": "string"
+				},
+				"PaymentStatusName": {
+					"type": "string"
+				},
+				"PaymentAmount": {
+					"type": "integer"
+				},
+				"PaymentDate": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
