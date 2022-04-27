@@ -74,6 +74,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table anb.Payments",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
@@ -170,6 +171,14 @@
 								"sink": {
 									"name": "PaymentDate",
 									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['CreatedOn']"
+								},
+								"sink": {
+									"name": "CreatedOn"
 								}
 							}
 						],
