@@ -1,5 +1,5 @@
 {
-	"name": "DS_ingestion_customerdim",
+	"name": "DS_ingestion_Customerdim",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_ingestion_database",
