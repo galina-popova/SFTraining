@@ -121,8 +121,8 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          BankStatusName = IngBankStatusName,",
-				"          BankStatusCode = IngBankStatusCode",
+				"          BankStatusCode = IngBankStatusCode,",
+				"          BankStatusName = IngBankStatusName",
 				"     )) ~> sinkBankStatuses2"
 			]
 		}
