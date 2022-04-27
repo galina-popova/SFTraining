@@ -1,0 +1,45 @@
+{
+	"name": "ds_Payment_param_JSON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SchemaName": {
+				"type": "string",
+				"defaultValue": "nvl"
+			}
+		},
+		"folder": {
+			"name": "ingestion"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "copyParams.json",
+				"folderPath": "payments/parameters",
+				"fileSystem": "payments"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"PaymentContainer": {
+					"type": "string"
+				},
+				"PaymentRootFolder": {
+					"type": "string"
+				},
+				"SchemaName": {
+					"type": "string"
+				},
+				"IngestionTableName": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
