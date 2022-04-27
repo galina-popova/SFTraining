@@ -1,0 +1,50 @@
+{
+	"name": "ds_CustomerDim",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftraining",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Customers",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Customers.xlsx",
+				"folderPath": "customerdim/raw",
+				"fileSystem": "dimensions"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
