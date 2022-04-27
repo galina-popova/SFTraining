@@ -61,7 +61,6 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          PaymentStatusId = Payment_ID,",
 				"          PaymentStatusName = PaymentStatus",
 				"     )) ~> INGPaymentStatuses"
 			]
