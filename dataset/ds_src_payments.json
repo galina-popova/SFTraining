@@ -12,7 +12,7 @@
 			},
 			"paymentsRootFolder": {
 				"type": "string",
-				"defaultValue": "/payments/raw"
+				"defaultValue": "payments/raw"
 			}
 		},
 		"annotations": [],
