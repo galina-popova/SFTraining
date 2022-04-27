@@ -172,7 +172,7 @@
 								"type": "Expression"
 							},
 							"tableName": {
-								"value": "@activity('get_params').output.firstRow.IngestionTableName",
+								"value": "@activity('get_params').output.firstRow.TableName",
 								"type": "Expression"
 							}
 						}
