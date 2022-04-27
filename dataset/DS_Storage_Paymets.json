@@ -6,10 +6,10 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"containername": {
+			"PaymentContainer": {
 				"type": "string"
 			},
-			"rootfolder ": {
+			"PaymentRootFolder": {
 				"type": "string"
 			}
 		},
@@ -21,9 +21,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "copyParams.json",
-				"folderPath": "payments/parameters",
-				"fileSystem": "payments"
+				"folderPath": {
+					"value": "@dataset().PaymentRootFolder",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().PaymentContainer",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
