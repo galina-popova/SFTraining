@@ -1,0 +1,29 @@
+{
+	"name": "DS_Curation_PaymentStatuses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Is_curation_DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Curation"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PaymentStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PaymentStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "mm",
+			"table": "PaymentStatuses"
+		}
+	}
+}
