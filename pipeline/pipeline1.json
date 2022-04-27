@@ -71,10 +71,10 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"DS_P_container_name": {
-								"value": "@activity('ParamFile').output.firstrow",
+								"value": "@activity('ParamFile').output.firstRow.PaymentContainer\n",
 								"type": "Expression"
 							},
-							"Ds_P_schema_name": "gp"
+							"DS_P_root_folder_name": "@activity('ParamFile').output.firstRow.PaymentRootFolder"
 						}
 					}
 				]
