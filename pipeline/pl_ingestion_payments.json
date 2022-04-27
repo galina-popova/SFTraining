@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
+				"name": "GetParametar",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -34,11 +34,11 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "CopyPayments",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "GetParametar",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -175,11 +175,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"PaymentContainer": {
-								"value": "@activity('Lookup1').output.firstRow.PaymentContainer",
+								"value": "@activity('GetParametar').output.firstRow.PaymentContainer",
 								"type": "Expression"
 							},
 							"PaymentRootFolder": {
-								"value": "@activity('Lookup1').output.firstRow.PaymentRootFolder",
+								"value": "@activity('GetParametar').output.firstRow.PaymentRootFolder",
 								"type": "Expression"
 							}
 						}
@@ -195,7 +195,7 @@
 								"type": "Expression"
 							},
 							"IngestionTableName": {
-								"value": "@activity('Lookup1').output.firstRow.IngestionTableName\r\n",
+								"value": "@activity('GetParametar').output.firstRow.IngestionTableName\n",
 								"type": "Expression"
 							}
 						}
