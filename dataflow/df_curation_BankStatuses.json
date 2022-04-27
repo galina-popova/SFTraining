@@ -119,7 +119,10 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBankStatuses2"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          BankStatusName = IngBankStatusName",
+				"     )) ~> sinkBankStatuses2"
 			]
 		}
 	}
