@@ -172,14 +172,6 @@
 									"name": "PaymentDate",
 									"type": "DateTime"
 								}
-							},
-							{
-								"source": {
-									"path": "$['CreatedOn']"
-								},
-								"sink": {
-									"name": "CreatedOn"
-								}
 							}
 						],
 						"collectionReference": "",
