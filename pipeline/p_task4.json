@@ -129,7 +129,13 @@
 				"inputs": [
 					{
 						"referenceName": "ds_payments",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"paymentsContainer": {
+								"value": "@activity('Get Params').output.firstRow.PaymentContainer",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -170,6 +176,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"windowStart": {
+				"type": "string"
+			},
+			"windowEnd": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
