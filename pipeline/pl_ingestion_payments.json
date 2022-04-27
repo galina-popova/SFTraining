@@ -163,17 +163,10 @@
 									"name": "PaymentDate",
 									"type": "DateTime"
 								}
-							},
-							{
-								"source": {
-									"path": "$['Body']['SystemProperties']"
-								},
-								"sink": {
-									"name": "SystemProperties"
-								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
