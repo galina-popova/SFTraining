@@ -16,10 +16,12 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "PaymentStatus",
 				"type": "String"
 			}
 		]
