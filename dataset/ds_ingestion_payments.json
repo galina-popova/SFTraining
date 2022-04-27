@@ -77,8 +77,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "drr",
-			"table": "Payments"
+			"schema": {
+				"value": "@dataset().schemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
