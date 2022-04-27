@@ -1,0 +1,29 @@
+{
+	"name": "ds_PaymentStatus_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_database",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ingestion"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PaymentStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PaymentStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nvl",
+			"table": "PaymentStatuses"
+		}
+	}
+}
