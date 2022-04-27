@@ -5,6 +5,9 @@
 			"referenceName": "ls_ingestion_database",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Ingestion"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
