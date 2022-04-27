@@ -36,7 +36,7 @@
 					"name": "selectBankStatuses"
 				},
 				{
-					"name": "derivedBankStatuses"
+					"name": "splitBankStatuses"
 				}
 			],
 			"scriptLines": [
@@ -71,8 +71,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectBankStatuses",
-				"selectBankStatuses derive(Insert = iifNull(CuBankStatusCode)) ~> derivedBankStatuses",
-				"derivedBankStatuses sink(allowSchemaDrift: true,",
+				"selectBankStatuses split(iifNull(CuBankStatusCode),",
+				"     and(IngBankStatusCode == CuBankStatusCode, IngBankStatusName != CuBankStatusName),",
+				"     disjoint: false) ~> splitBankStatuses@(InsertRows, UpdateRows, )",
+				"splitBankStatuses@InsertRows sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          BankStatusId as integer,",
