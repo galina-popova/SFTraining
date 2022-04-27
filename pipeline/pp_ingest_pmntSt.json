@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"enablePartitionDiscovery": false
+							"enablePartitionDiscovery": true
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -28,12 +28,27 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table drr.PaymentStatuses",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "PaymentStatusId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
