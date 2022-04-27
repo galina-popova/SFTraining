@@ -1,0 +1,29 @@
+{
+	"name": "ds_cur_paymentStauses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSql_curated",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "curation"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PaymentStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PaymentStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gp",
+			"table": "PaymentStatuses"
+		}
+	}
+}
