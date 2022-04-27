@@ -78,7 +78,7 @@
 		],
 		"typeProperties": {
 			"schema": {
-				"value": "@dataset().ShemaName",
+				"value": "'gp'",
 				"type": "Expression"
 			},
 			"table": {
