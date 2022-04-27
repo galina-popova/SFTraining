@@ -5,6 +5,14 @@
 			"referenceName": "ls_sftraning_storage",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"containername": {
+				"type": "string"
+			},
+			"rootfolder ": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Storage"
 		},
