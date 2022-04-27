@@ -33,7 +33,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Ingest Payments",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -52,27 +52,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
 					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_param_json",
-						"type": "DatasetReference"
-					}
-				]
+				}
 			}
 		],
+		"parameters": {
+			"windowStart": {
+				"type": "string"
+			},
+			"windowEnd": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
