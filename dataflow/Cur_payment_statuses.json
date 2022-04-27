@@ -47,6 +47,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CurNewrows"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_cur_bankStauses",
+						"type": "DatasetReference"
+					},
+					"name": "BankStatusUpdatedRows"
 				}
 			],
 			"transformations": [
@@ -148,7 +155,22 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> CurNewrows"
+				"     errorHandlingOption: 'stopOnFirstError') ~> CurNewrows",
+				"splitNewUpd@forUpdate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> BankStatusUpdatedRows"
 			]
 		}
 	}
