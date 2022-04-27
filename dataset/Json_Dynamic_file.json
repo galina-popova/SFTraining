@@ -26,8 +26,14 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "2022-04-26-01-00.json",
-				"folderPath": "payments/raw",
-				"fileSystem": "payments"
+				"folderPath": {
+					"value": "@dataset().DS_P_root_folder_name",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().DS_P_container_name",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
