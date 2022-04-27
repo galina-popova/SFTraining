@@ -1,0 +1,10 @@
+{
+	"name": "vg_AzureKeyVault1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-sftraining.vault.azure.net/"
+		}
+	}
+}
