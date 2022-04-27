@@ -51,6 +51,9 @@
 				},
 				{
 					"name": "renameCols"
+				},
+				{
+					"name": "splitNewUpd"
 				}
 			],
 			"scriptLines": [
@@ -104,6 +107,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> renameCols",
+				"renameCols split(isNull(CUR_BankStatusCode),",
+				"     and( ING_BankStatusCode==CUR_BankStatusCode , ING_BankStatusName!=CUR_BankStatusName),",
+				"     disjoint: false) ~> splitNewUpd@(New, forUpdate, notChnaged)",
 				"RecDoesnExists sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
