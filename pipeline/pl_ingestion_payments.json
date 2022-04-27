@@ -66,6 +66,7 @@
 								"value": "@pipeline().parameters.EndDate",
 								"type": "Expression"
 							},
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
