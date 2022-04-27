@@ -1,0 +1,100 @@
+{
+	"name": "df_curation_customer",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_ingestion_CustomerDim",
+						"type": "DatasetReference"
+					},
+					"name": "sourceIngCustomer"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_ingestion_CustomerDim",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCurationCustomer"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "joinCustomer"
+				},
+				{
+					"name": "selectBankStatuses"
+				},
+				{
+					"name": "splitCustomer"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceIngCustomer",
+				"source(output(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceCurationCustomer",
+				"sourceIngCustomer, sourceCurationCustomer join(sourceIngCustomer@UniqueCustomerNumber == sourceCurationCustomer@UniqueCustomerNumber,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinCustomer",
+				"joinCustomer select(mapColumn(",
+				"          IngCustomerDimId = sourceIngCustomer@CustomerDimId,",
+				"          IngUniqueCustomerNumber = sourceIngCustomer@UniqueCustomerNumber,",
+				"          IngCustomerName = sourceIngCustomer@CustomerName,",
+				"          IngPhone = sourceIngCustomer@Phone,",
+				"          IngEmail = sourceIngCustomer@Email,",
+				"          IngBillingAddress = sourceIngCustomer@BillingAddress,",
+				"          IngBillingCity = sourceIngCustomer@BillingCity,",
+				"          IngBillingPostalCode = sourceIngCustomer@BillingPostalCode,",
+				"          IngBillingState = sourceIngCustomer@BillingState,",
+				"          IngBillingCountryName = sourceIngCustomer@BillingCountryName,",
+				"          CurCustomerDimId = sourceCurationCustomer@CustomerDimId,",
+				"          CurUniqueCustomerNumber = sourceCurationCustomer@UniqueCustomerNumber,",
+				"          CurCustomerName = sourceCurationCustomer@CustomerName,",
+				"          CurPhone = sourceCurationCustomer@Phone,",
+				"          CurEmail = sourceCurationCustomer@Email,",
+				"          CurBillingAddress = sourceCurationCustomer@BillingAddress,",
+				"          CurBillingCity = sourceCurationCustomer@BillingCity,",
+				"          CurBillingPostalCode = sourceCurationCustomer@BillingPostalCode,",
+				"          CurBillingState = sourceCurationCustomer@BillingState,",
+				"          CurBillingCountryName = sourceCurationCustomer@BillingCountryName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectBankStatuses",
+				"selectBankStatuses split(ERROR_FUNCTION(''),",
+				"     ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> splitCustomer@(InsertRows, UpdateRows, NoChange)"
+			]
+		}
+	}
+}
