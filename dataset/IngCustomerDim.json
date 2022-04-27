@@ -1,5 +1,5 @@
 {
-	"name": "IngCustomersExcel",
+	"name": "IngCustomerDim",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlIngestion",
