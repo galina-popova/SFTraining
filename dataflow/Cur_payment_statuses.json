@@ -66,7 +66,10 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> CurPaymStatusesInsertNew"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PaymentStatusName",
+				"     )) ~> CurPaymStatusesInsertNew"
 			]
 		}
 	}
