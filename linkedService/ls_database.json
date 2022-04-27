@@ -1,0 +1,18 @@
+{
+	"name": "ls_database",
+	"properties": {
+		"description": "Link to target Data Base",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_secret_DB",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ingestionDB-connectionString"
+			}
+		}
+	}
+}
