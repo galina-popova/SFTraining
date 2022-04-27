@@ -18,7 +18,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "2022-04-26-01-00.json",
 				"folderPath": {
 					"value": "@dataset().DS_P_root_folder_name",
 					"type": "Expression"
