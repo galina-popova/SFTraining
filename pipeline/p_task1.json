@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Copy data1",
+				"description": "truncate table ys.PaymentStatuses",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
