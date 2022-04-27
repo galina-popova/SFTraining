@@ -1,13 +1,50 @@
 {
-	"name": "df_",
+	"name": "df_current_payment_statuses",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_ingestion_paymentStatutes",
+						"type": "DatasetReference"
+					},
+					"name": "IngPaymentStatuses"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_cur_payment_statuses",
+						"type": "DatasetReference"
+					},
+					"name": "CurPaymentStatuses"
+				}
+			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "RecordDoesntExist"
+				}
+			],
 			"scriptLines": [
-				""
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> IngPaymentStatuses",
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurPaymentStatuses",
+				"IngPaymentStatuses, CurPaymentStatuses exists(IngPaymentStatuses@PaymentStatusName == CurPaymentStatuses@PaymentStatusName,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> RecordDoesntExist"
 			]
 		}
 	}
