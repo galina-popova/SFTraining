@@ -8,7 +8,7 @@
 			"connectionString": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
-					"referenceName": "ls_secret_DB",
+					"referenceName": "ls_secret_keys",
 					"type": "LinkedServiceReference"
 				},
 				"secretName": "ingestionDB-connectionString"
