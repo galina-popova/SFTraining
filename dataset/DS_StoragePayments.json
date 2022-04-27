@@ -5,6 +5,9 @@
 			"referenceName": "ls_sftraning_storage",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Storage"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
