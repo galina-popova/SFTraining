@@ -27,7 +27,7 @@
 				}
 			},
 			{
-				"name": "Data flow1",
+				"name": "IngBankStatuses",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
