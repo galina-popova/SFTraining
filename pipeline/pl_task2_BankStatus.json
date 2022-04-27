@@ -1,9 +1,10 @@
 {
-	"name": "pipeline1",
+	"name": "pl_task2_BankStatus",
 	"properties": {
+		"description": "Pipeline for task 2",
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "BankStatus CSV-to-DB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -15,8 +16,72 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE [nvl].[BankStatuses];",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "BankStatusCode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BankStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BankStatusName",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BankStatusName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_BankStatus_CSV",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_BankStatus_Table",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
