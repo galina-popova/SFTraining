@@ -1,0 +1,49 @@
+{
+	"name": "CustomersExcel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PaymentLikservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Customers",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Customers.xlsx",
+				"folderPath": "customerdim/raw",
+				"container": "dimensions"
+			}
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
