@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "pl_ingestion_copy_bankstatuses",
 	"properties": {
 		"activities": [
 			{
