@@ -72,7 +72,24 @@
 							"type": "JsonReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$"
+								}
+							}
+						],
+						"mapComplexValuesToString": true
+					}
 				},
 				"inputs": [
 					{
@@ -85,6 +102,22 @@
 							},
 							"paymentsRootFolder": {
 								"value": "@activity('Get Params').output.firstRow.PaymentRootFolder",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_ingestion_payments",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": {
+								"value": "@activity('Get Params').output.firstRow.SchemaName",
+								"type": "Expression"
+							},
+							"tableName": {
+								"value": "@activity('Get Params').output.firstRow.IngestionTableName",
 								"type": "Expression"
 							}
 						}
