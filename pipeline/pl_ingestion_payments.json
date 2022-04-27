@@ -106,7 +106,7 @@
 								"type": "Expression"
 							},
 							"PaymentRootFolder": {
-								"value": "@activity('Lookup1').output.value",
+								"value": "@activity('Lookup1').output.firstRow.PaymentRootFolder",
 								"type": "Expression"
 							}
 						}
