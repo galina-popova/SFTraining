@@ -120,10 +120,12 @@
 		],
 		"parameters": {
 			"windowStartVg": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2022-04-22"
 			},
 			"windowEndVg": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2022-04-27"
 			}
 		},
 		"annotations": []
