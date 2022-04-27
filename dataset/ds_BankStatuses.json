@@ -1,0 +1,36 @@
+{
+	"name": "ds_BankStatuses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Files"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "BankStatuses.csv",
+				"folderPath": "bankstatuses/raw",
+				"container": "dimensions"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "BankStatusCode",
+				"type": "String"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "String"
+			}
+		]
+	}
+}
