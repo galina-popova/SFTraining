@@ -1,0 +1,36 @@
+{
+	"name": "ds_Payment_JSON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"paymentContainer": {
+				"type": "string"
+			},
+			"paymentFolder": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "ingestion"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().paymentFolder",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().paymentContainer",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}
