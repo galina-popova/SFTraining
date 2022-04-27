@@ -53,23 +53,126 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.windowStart",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@pipeline().parameters.windowEnd",
+								"type": "Expression"
+							},
+							"wildcardFileName": {
+								"value": "*.json",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['PaymentId']"
+								},
+								"sink": {
+									"name": "PaymentId",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PaymentIdentifier']"
+								},
+								"sink": {
+									"name": "PaymentIdentifier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['UniqueCustomerNumber']"
+								},
+								"sink": {
+									"name": "UniqueCustomerNumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['BankStatusName']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PaymentStatusName']"
+								},
+								"sink": {
+									"name": "PaymentStatusName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PaymentAmount']"
+								},
+								"sink": {
+									"name": "PaymentAmount",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PaymentDate']"
+								},
+								"sink": {
+									"name": "PaymentDate",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
+					{
+						"referenceName": "ds_src_payments",
+						"type": "DatasetReference",
+						"parameters": {
+							"paymentsContainer": {
+								"value": "@activity('get_params').output.firstRow.PaymentsContainer",
+								"type": "Expression"
+							},
+							"paymentsRootFolder": {
+								"value": "@activity('get_params').output.firstRow.PaymentsRootFolder",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "ds_ingestion_payments",
 						"type": "DatasetReference",
 						"parameters": {
 							"schemaName": {
-								"value": "@activity('get_params').output.firstRow.PaymentContainer",
+								"value": "@activity('get_params').output.firstRow.SchemaName",
 								"type": "Expression"
 							},
 							"tableName": {
-								"value": "@activity('get_params').output.firstRow.PaymentRootFolder",
+								"value": "@activity('get_params').output.firstRow.IngestionTableName",
 								"type": "Expression"
 							}
 						}
