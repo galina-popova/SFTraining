@@ -1,0 +1,19 @@
+{
+	"name": "ls_sftraining_golden_db",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked service to golden database",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_kv_sf_training",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "goldenDB-connectionString"
+			}
+		}
+	}
+}

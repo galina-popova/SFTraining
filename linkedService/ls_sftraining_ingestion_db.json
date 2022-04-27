@@ -1,0 +1,19 @@
+{
+	"name": "ls_sftraining_ingestion_db",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked service to ingestion db",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_kv_sf_training",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ingestionDB-connectionString"
+			}
+		}
+	}
+}
