@@ -1,0 +1,34 @@
+{
+	"name": "ds_param_dyn",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"contName": {
+				"type": "string"
+			},
+			"rootFolderName": {
+				"type": "string"
+			},
+			"SchemaName": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Files"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation"
+			}
+		},
+		"schema": {}
+	}
+}
