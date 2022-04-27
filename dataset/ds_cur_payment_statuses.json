@@ -1,0 +1,29 @@
+{
+	"name": "ds_cur_payment_statuses",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftraining_curration_db",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "curation"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PaymentStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PaymentStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "anb",
+			"table": "PaymentStatuses"
+		}
+	}
+}
