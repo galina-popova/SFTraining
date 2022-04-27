@@ -1,0 +1,59 @@
+{
+	"name": "Excel1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vg_AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Customers",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Customers.xlsx",
+				"folderPath": "customerdim/raw",
+				"fileSystem": "dimensions"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "UniqueCustomerNumber",
+				"type": "String"
+			},
+			{
+				"name": "CustomerName",
+				"type": "String"
+			},
+			{
+				"name": "Phone",
+				"type": "String"
+			},
+			{
+				"name": "Email",
+				"type": "String"
+			},
+			{
+				"name": "BillingAddress",
+				"type": "String"
+			},
+			{
+				"name": "BillingCity",
+				"type": "String"
+			},
+			{
+				"name": "BillingPostalCode",
+				"type": "String"
+			},
+			{
+				"name": "BillingState",
+				"type": "String"
+			},
+			{
+				"name": "BillingCountryName",
+				"type": "String"
+			}
+		]
+	}
+}
