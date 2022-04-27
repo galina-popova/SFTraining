@@ -1,0 +1,30 @@
+{
+	"name": "BankStatusesCsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PaymentLikservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "BankStatuses.csv",
+				"folderPath": "bankstatuses/raw",
+				"container": "dimensions"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
