@@ -54,6 +54,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "CreatedOn",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
@@ -163,6 +172,11 @@
 								"sink": {
 									"name": "PaymentDate",
 									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['CreatedOn']"
 								}
 							}
 						],
