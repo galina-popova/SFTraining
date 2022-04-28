@@ -104,36 +104,6 @@
 							},
 							{
 								"source": {
-									"path": "$['SystemProperties']['connectionDeviceId']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['connectionAuthMethod']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['connectionDeviceGenerationId']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['contentType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['contentEncoding']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SystemProperties']['enqueuedTime']"
-								}
-							},
-							{
-								"source": {
 									"path": "$['Body']['payment_identifier']"
 								},
 								"sink": {
