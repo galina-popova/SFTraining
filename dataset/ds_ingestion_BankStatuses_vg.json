@@ -1,0 +1,29 @@
+{
+	"name": "ds_ingestion_BankStatuses_vg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vg_linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ingestion_ds"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PaymentStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PaymentStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "vg",
+			"table": "BankStatuses"
+		}
+	}
+}
