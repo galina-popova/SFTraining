@@ -69,7 +69,10 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> CurationTargetPaymentStatuses"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PaymentStatusName",
+				"     )) ~> CurationTargetPaymentStatuses"
 			]
 		}
 	}
