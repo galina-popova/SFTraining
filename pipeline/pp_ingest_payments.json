@@ -105,15 +105,6 @@
 							},
 							{
 								"source": {
-									"path": "$['Properties']"
-								},
-								"sink": {
-									"name": "Properties",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['Body']['payment_identifier']"
 								},
 								"sink": {
