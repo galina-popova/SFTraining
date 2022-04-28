@@ -9,7 +9,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText1",
+						"referenceName": "ds_ingestion_PaymentStatuses_vg",
 						"type": "DatasetReference"
 					},
 					"name": "ingPaymentStatuses"
@@ -23,14 +23,20 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "exists1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
-				"          Column_1 as string",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> ingPaymentStatuses",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> ingPaymentStatuses",
 				"source(output(",
 				"          BankStatusId as integer,",
 				"          BankStatusCode as string,",
@@ -39,7 +45,10 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> CurPaymentStatuses"
+				"     format: 'table') ~> CurPaymentStatuses",
+				"ingPaymentStatuses, CurPaymentStatuses exists(PaymentStatusName == ERROR_FUNCTION(''),",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists1"
 			]
 		}
 	}
