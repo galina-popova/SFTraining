@@ -1,0 +1,17 @@
+{
+	"name": "ds_CURRATE_PAYMENT_STATUSES",
+	"properties": {
+		"folder": {
+			"name": "curration"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				""
+			]
+		}
+	}
+}
