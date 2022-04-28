@@ -13,6 +13,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "ingPaymentStatuses"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_curration_PaymentStatuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "CurPaymentStatuses"
 				}
 			],
 			"sinks": [],
@@ -23,7 +30,16 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> ingPaymentStatuses"
+				"     ignoreNoFilesFound: false) ~> ingPaymentStatuses",
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurPaymentStatuses"
 			]
 		}
 	}
