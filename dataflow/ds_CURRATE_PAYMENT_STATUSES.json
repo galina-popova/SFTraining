@@ -13,21 +13,10 @@
 						"type": "DatasetReference"
 					},
 					"name": "ingPaymentStatuses"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_curration_PaymentStatuses_vg",
-						"type": "DatasetReference"
-					},
-					"name": "CurPaymentStatuses"
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "exists1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          PaymentStatusId as integer,",
@@ -36,19 +25,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> ingPaymentStatuses",
-				"source(output(",
-				"          BankStatusId as integer,",
-				"          BankStatusCode as string,",
-				"          BankStatusName as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> CurPaymentStatuses",
-				"ingPaymentStatuses, CurPaymentStatuses exists(PaymentStatusName == ERROR_FUNCTION(''),",
-				"     negate:true,",
-				"     broadcast: 'auto')~> exists1"
+				"     format: 'table') ~> ingPaymentStatuses"
 			]
 		}
 	}
