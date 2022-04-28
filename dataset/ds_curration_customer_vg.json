@@ -1,0 +1,33 @@
+{
+	"name": "ds_curration_customer_vg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftraining_curration_db_vg",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "curration_ds"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BankStatusId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BankStatusCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankStatusName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "vg",
+			"table": "CustomerDim"
+		}
+	}
+}
