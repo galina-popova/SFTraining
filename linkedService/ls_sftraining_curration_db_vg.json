@@ -1,0 +1,17 @@
+{
+	"name": "ls_sftraining_curration_db_vg",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "vg_AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "curationDB-connectionString"
+			}
+		}
+	}
+}
