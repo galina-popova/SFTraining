@@ -5,6 +5,9 @@
 			"referenceName": "vg_AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Ingestion_ds"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

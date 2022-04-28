@@ -13,6 +13,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "Ingestion_ds"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [

@@ -13,13 +13,22 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "Ingestion_ds"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "@dataset().paymentsRootFolderVg",
-				"fileSystem": "@dataset().paymentsContainerVg"
+				"folderPath": {
+					"value": "@dataset().paymentsRootFolderVg",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().paymentsContainerVg",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
