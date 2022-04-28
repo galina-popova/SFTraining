@@ -117,8 +117,8 @@
 									"path": "$['Body']['payment_identifier']"
 								},
 								"sink": {
-									"name": "PaymentId",
-									"type": "Int32"
+									"name": "PaymentIdentifier",
+									"type": "String"
 								}
 							},
 							{
@@ -178,6 +178,10 @@
 							{
 								"source": {
 									"path": "$['CreatedOn']"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime"
 								}
 							}
 						],
