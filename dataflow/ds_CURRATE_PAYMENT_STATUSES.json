@@ -13,6 +13,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "ingPaymentStatuses"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_ingestion_PaymentStatuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "currPaymentStatus"
 				}
 			],
 			"sinks": [],
@@ -25,7 +32,15 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> ingPaymentStatuses"
+				"     format: 'table') ~> ingPaymentStatuses",
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> currPaymentStatus"
 			]
 		}
 	}
