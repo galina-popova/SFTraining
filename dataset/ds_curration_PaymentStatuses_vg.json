@@ -26,7 +26,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "am",
+			"schema": "vg",
 			"table": "PaymentStatuses"
 		}
 	}
