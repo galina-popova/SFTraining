@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "copyParams.json",
+				"fileName": "copyParams_drr.json",
 				"folderPath": "payments/parameters",
 				"fileSystem": "payments"
 			}
