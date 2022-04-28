@@ -1,0 +1,34 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ing_pmntSt",
+						"type": "DatasetReference"
+					},
+					"name": "IngPmntSt"
+				},
+				{
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> IngPmntSt",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source2"
+			]
+		}
+	}
+}
