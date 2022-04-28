@@ -107,8 +107,8 @@
 									"path": "$['Body']['payment_identifier']"
 								},
 								"sink": {
-									"name": "PaymentIdentifier",
-									"type": "String"
+									"name": "PaymentId",
+									"type": "Int32"
 								}
 							},
 							{
