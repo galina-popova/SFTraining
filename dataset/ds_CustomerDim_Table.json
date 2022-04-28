@@ -2,7 +2,7 @@
 	"name": "ds_CustomerDim_Table",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_database",
+			"referenceName": "ls_database_ingestion",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
