@@ -185,10 +185,11 @@
 							},
 							{
 								"source": {
-									"path": "$['CreateOn']"
+									"path": "$['CreatedOn']"
 								},
 								"sink": {
-									"name": "CreatedOn"
+									"name": "CreatedOn",
+									"type": "DateTime"
 								}
 							}
 						],
