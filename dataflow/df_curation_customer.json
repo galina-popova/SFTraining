@@ -130,7 +130,7 @@
 				"     IngChecksum != CurChecksum,",
 				"     disjoint: true) ~> splitCustomer@(InsertRows, UpdateRows, NoChange)",
 				"splitCustomer@InsertRows derive(ValidFrom = currentTimestamp(),",
-				"          ValidTo = toTimestamp('3000-01-01 00:00:00', 'yyyy-MM-dd hh:mm:ss'),",
+				"          ValidTo = toTimestamp('3000-01-01 00:00:00', 'yyyy-MM-dd HH:mm:ss'),",
 				"          IsActive = 1) ~> derivedColumn1",
 				"sourceCurationCustomer derive(C_checksum = sha2(256, UniqueCustomerNumber,CustomerName,CustomerName,Phone,Email,BillingAddress,BillingCity,BillingPostalCode,BillingState,BillingCountryName)) ~> derivedCChecsum",
 				"sourceIngCustomer derive(ING_checksum = sha2(256, UniqueCustomerNumber,CustomerName,Phone,Email,BillingAddress,BillingCity,BillingPostalCode,BillingState,BillingCountryName)) ~> derivedINGChecksum",
