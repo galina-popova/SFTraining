@@ -96,7 +96,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select *\\nfrom mm.customer\\nwhere valid_to = \\'9999-12-31\\'',",
+				"     query: 'select *\\nfrom mm.customerdim\\nwhere validto = \\'9999-12-31\\'',",
 				"     format: 'query') ~> sourceCurationCustomer",
 				"derivedINGChecksum, derivedCChecsum join(sourceIngCustomer@UniqueCustomerNumber == sourceCurationCustomer@UniqueCustomerNumber,",
 				"     joinType:'left',",
