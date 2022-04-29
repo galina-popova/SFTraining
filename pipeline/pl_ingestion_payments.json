@@ -182,6 +182,14 @@
 									"name": "SystemProperties",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"path": "$['CreateOn']"
+								},
+								"sink": {
+									"name": "CreatedOn"
+								}
 							}
 						],
 						"collectionReference": "",
