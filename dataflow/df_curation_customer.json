@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "DS_ingestion_CustomerDim",
+						"referenceName": "DS_Curation_CustomerDim",
 						"type": "DatasetReference"
 					},
 					"name": "sourceCurationCustomer"
@@ -77,8 +77,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: '',",
-				"     format: 'query') ~> sourceIngCustomer",
+				"     format: 'table') ~> sourceIngCustomer",
 				"source(output(",
 				"          CustomerDimId as integer,",
 				"          UniqueCustomerNumber as string,",
@@ -89,7 +88,10 @@
 				"          BillingCity as string,",
 				"          BillingPostalCode as string,",
 				"          BillingState as string,",
-				"          BillingCountryName as string",
+				"          BillingCountryName as string,",
+				"          ValidFrom as timestamp,",
+				"          ValidTo as timestamp,",
+				"          IsActive as boolean",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
