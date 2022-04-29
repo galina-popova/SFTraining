@@ -127,7 +127,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectBankStatuses",
 				"selectBankStatuses split(or(isNull(CurUniqueCustomerNumber),IngChecksum != CurChecksum),",
-				"     IngChecksum != CurChecksum,",
+				"     and(not(isNull(IngUniqueCustomerNumber)),IngChecksum != CurChecksum),",
 				"     disjoint: true) ~> splitCustomer@(InsertRows, UpdateRows, NoChange)",
 				"splitCustomer@InsertRows derive(ValidFrom = currentTimestamp(),",
 				"          ValidTo = toTimestamp('3000-01-01 00:00:00', 'yyyy-MM-dd HH:mm:ss'),",
