@@ -59,7 +59,7 @@
 							{
 								"name": "CreatedOn",
 								"value": {
-									"value": "utcnow()",
+									"value": "@utcnow()",
 									"type": "Expression"
 								}
 							}
