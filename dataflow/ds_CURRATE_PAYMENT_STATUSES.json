@@ -47,7 +47,7 @@
 				"     format: 'table') ~> currPaymentStatus",
 				"ingPaymentStatuses, currPaymentStatus exists(ingPaymentStatuses@PaymentStatusName == currPaymentStatus@PaymentStatusName,",
 				"     negate:true,",
-				"     broadcast: 'auto')~> RecordDoesntExists"
+				"     broadcast: 'left')~> RecordDoesntExists"
 			]
 		}
 	}
