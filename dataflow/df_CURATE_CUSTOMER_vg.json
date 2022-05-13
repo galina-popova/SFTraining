@@ -55,6 +55,9 @@
 				},
 				{
 					"name": "selectCurComparableColumns"
+				},
+				{
+					"name": "AddCurRowSignature"
 				}
 			],
 			"scriptLines": [
@@ -155,6 +158,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectCurComparableColumns",
+				"selectCurComparableColumns derive(CUR_Signature = sha2(256,columns())) ~> AddCurRowSignature",
 				"addColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
