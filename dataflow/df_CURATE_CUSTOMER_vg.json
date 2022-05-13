@@ -29,6 +29,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "InsertNewRecords"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_curration_customer_vg",
+						"type": "DatasetReference"
+					},
+					"name": "InsertUpdatedRecords"
 				}
 			],
 			"transformations": [
@@ -136,7 +143,6 @@
 				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
 				"          CUR_IsActive = 1) ~> addColumns",
 				"SplitNewRecords@existingCustomers select(mapColumn(",
-				"          ING_CustomerDimId,",
 				"          ING_UniqueCustomerNumber,",
 				"          ING_CustomerName,",
 				"          ING_Phone,",
@@ -209,7 +215,46 @@
 				"          ValidFrom = CUR_ValidFrom,",
 				"          ValidTo = CUR_ValidTo,",
 				"          IsActive = CUR_IsActive",
-				"     )) ~> InsertNewRecords"
+				"     )) ~> InsertNewRecords",
+				"addColumns2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string,",
+				"          ValidFrom as timestamp,",
+				"          ValidTo as timestamp,",
+				"          IsActive as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          UniqueCustomerNumber = ING_UniqueCustomerNumber,",
+				"          CustomerName = ING_CustomerName,",
+				"          Phone = ING_Phone,",
+				"          Email = ING_Email,",
+				"          BillingAddress = ING_BillingAddress,",
+				"          BillingCity = ING_BillingCity,",
+				"          BillingPostalCode = ING_BillingPostalCode,",
+				"          BillingState = ING_BillingState,",
+				"          BillingCountryName = ING_BillingCountryName,",
+				"          ValidFrom = CUR_ValidFrom,",
+				"          ValidTo = CUR_ValidTo,",
+				"          IsActive = CUR_IsActive",
+				"     )) ~> InsertUpdatedRecords"
 			]
 		}
 	}
