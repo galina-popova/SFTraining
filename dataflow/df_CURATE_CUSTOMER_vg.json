@@ -52,6 +52,9 @@
 				},
 				{
 					"name": "AddingRowsSignature"
+				},
+				{
+					"name": "selectCurComparableColumns"
 				}
 			],
 			"scriptLines": [
@@ -139,6 +142,19 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectingComparableColumns",
 				"selectingComparableColumns derive(ING_Signature = sha2(256, ING_UniqueCustomerNumber,ING_CustomerName,ING_Phone,ING_Email,ING_BillingAddress,ING_BillingCity,ING_BillingPostalCode,ING_BillingState,ING_BillingCountryName)) ~> AddingRowsSignature",
+				"CurCustomers select(mapColumn(",
+				"          UniqueCustomerNumber,",
+				"          CustomerName,",
+				"          Phone,",
+				"          Email,",
+				"          BillingAddress,",
+				"          BillingCity,",
+				"          BillingPostalCode,",
+				"          BillingState,",
+				"          BillingCountryName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectCurComparableColumns",
 				"addColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
