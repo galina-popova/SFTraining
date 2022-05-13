@@ -12,17 +12,61 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "BankStatusId",
+				"name": "CustomerDimId",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "BankStatusCode",
+				"name": "UniqueCustomerNumber",
 				"type": "nvarchar"
 			},
 			{
-				"name": "BankStatusName",
+				"name": "CustomerName",
 				"type": "nvarchar"
+			},
+			{
+				"name": "Phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingPostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCountryName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ValidFrom",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ValidTo",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "IsActive",
+				"type": "bit"
 			}
 		],
 		"typeProperties": {

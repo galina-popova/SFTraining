@@ -12,16 +12,12 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "BankStatusId",
+				"name": "PaymentStatusId",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "BankStatusCode",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BankStatusName",
+				"name": "PaymentStatusName",
 				"type": "nvarchar"
 			}
 		],

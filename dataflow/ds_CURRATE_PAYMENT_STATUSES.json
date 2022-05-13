@@ -22,7 +22,15 @@
 					"name": "currPaymentStatus"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_curration_PaymentStatuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "curationTargetPaymentStatusesVg"
+				}
+			],
 			"transformations": [
 				{
 					"name": "RecordDoesntExists"
@@ -47,7 +55,24 @@
 				"     format: 'table') ~> currPaymentStatus",
 				"ingPaymentStatuses, currPaymentStatus exists(ingPaymentStatuses@PaymentStatusName == currPaymentStatus@PaymentStatusName,",
 				"     negate:true,",
-				"     broadcast: 'left')~> RecordDoesntExists"
+				"     broadcast: 'left')~> RecordDoesntExists",
+				"RecordDoesntExists sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PaymentStatusName",
+				"     )) ~> curationTargetPaymentStatusesVg"
 			]
 		}
 	}
