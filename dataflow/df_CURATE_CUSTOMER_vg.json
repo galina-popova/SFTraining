@@ -32,6 +32,12 @@
 				},
 				{
 					"name": "RenameColumns"
+				},
+				{
+					"name": "SplitNewRecords"
+				},
+				{
+					"name": "addColumns"
 				}
 			],
 			"scriptLines": [
@@ -97,7 +103,12 @@
 				"          CUR_BillingCountryName = CurCustomers@BillingCountryName",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> RenameColumns"
+				"     skipDuplicateMapOutputs: true) ~> RenameColumns",
+				"RenameColumns split(isNull(CUR_UniqueCustomerNumber),",
+				"     disjoint: false) ~> SplitNewRecords@(newCustomers, existingCustomers)",
+				"SplitNewRecords@newCustomers derive(CUR_ValidFrom = currentUTC(),",
+				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
+				"          column1CUR_IsActive = 1) ~> addColumns"
 			]
 		}
 	}
