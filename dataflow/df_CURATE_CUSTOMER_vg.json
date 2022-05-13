@@ -1,0 +1,71 @@
+{
+	"name": "df_CURATE_CUSTOMER_vg",
+	"properties": {
+		"folder": {
+			"name": "curration"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_ingestion_customer_tbl_vg",
+						"type": "DatasetReference"
+					},
+					"name": "IngCustomer"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_curration_customer_vg",
+						"type": "DatasetReference"
+					},
+					"name": "CurCustomers"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> IngCustomer",
+				"source(output(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string,",
+				"          ValidFrom as timestamp,",
+				"          ValidTo as timestamp,",
+				"          IsActive as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurCustomers",
+				"IngCustomer filter(ERROR_FUNCTION('')) ~> filter1"
+			]
+		}
+	}
+}

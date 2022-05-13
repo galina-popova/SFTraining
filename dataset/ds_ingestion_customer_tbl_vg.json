@@ -12,12 +12,44 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "PaymentStatusId",
+				"name": "CustomerDimId",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "PaymentStatusName",
+				"name": "UniqueCustomerNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CustomerName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingPostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BillingCountryName",
 				"type": "nvarchar"
 			}
 		],
