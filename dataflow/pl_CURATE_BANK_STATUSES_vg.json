@@ -26,6 +26,9 @@
 			"transformations": [
 				{
 					"name": "joinIngestionAndCuration"
+				},
+				{
+					"name": "RenameColumns"
 				}
 			],
 			"scriptLines": [
@@ -47,9 +50,19 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> CurBankStatusesVg",
-				"ingBankStatusesVg, CurBankStatusesVg join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"ingBankStatusesVg, CurBankStatusesVg join(ingBankStatusesVg@BankStatusCode == CurBankStatusesVg@BankStatusCode,",
 				"     joinType:'left',",
-				"     broadcast: 'auto')~> joinIngestionAndCuration"
+				"     broadcast: 'auto')~> joinIngestionAndCuration",
+				"joinIngestionAndCuration select(mapColumn(",
+				"          ING_BankStatusId = ingBankStatusesVg@BankStatusId,",
+				"          ING_BankStatusCode = ingBankStatusesVg@BankStatusCode,",
+				"          ING_BankStatusName = ingBankStatusesVg@BankStatusName,",
+				"          CUR_BankStatusId = CurBankStatusesVg@BankStatusId,",
+				"          CUR_BankStatusCode = CurBankStatusesVg@BankStatusCode,",
+				"          CUR_BankStatusName = CurBankStatusesVg@BankStatusName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RenameColumns"
 			]
 		}
 	}
