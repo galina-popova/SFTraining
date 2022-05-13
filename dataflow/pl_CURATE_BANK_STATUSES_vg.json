@@ -29,6 +29,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "AddNewRecords"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_curration_BankStatuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "updatedRecords"
 				}
 			],
 			"transformations": [
@@ -40,6 +47,9 @@
 				},
 				{
 					"name": "splitNewAndUpdatedRecords"
+				},
+				{
+					"name": "UpdateRecords"
 				}
 			],
 			"scriptLines": [
@@ -77,6 +87,7 @@
 				"RenameColumns split(isNull(CUR_BankStatusCode),",
 				"     and(ING_BankStatusCode==CUR_BankStatusCode, ING_BankStatusName!=CUR_BankStatusName),",
 				"     disjoint: false) ~> splitNewAndUpdatedRecords@(newRecords, updatedRecords, notChanged)",
+				"splitNewAndUpdatedRecords@updatedRecords alterRow(updateIf(true())) ~> UpdateRecords",
 				"splitNewAndUpdatedRecords@newRecords sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -95,7 +106,22 @@
 				"     mapColumn(",
 				"          BankStatusCode = ING_BankStatusCode,",
 				"          BankStatusName = ING_BankStatusName",
-				"     )) ~> AddNewRecords"
+				"     )) ~> AddNewRecords",
+				"UpdateRecords sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> updatedRecords"
 			]
 		}
 	}
