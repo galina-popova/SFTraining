@@ -25,7 +25,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_ingestion_BankStatuses_vg",
+						"referenceName": "ds_curration_BankStatuses_vg",
 						"type": "DatasetReference"
 					},
 					"name": "AddNewRecords"
