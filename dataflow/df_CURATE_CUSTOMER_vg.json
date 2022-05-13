@@ -25,7 +25,13 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "filter1"
+					"name": "FilterNullValues"
+				},
+				{
+					"name": "joinIngestioAndCuration"
+				},
+				{
+					"name": "RenameColumns"
 				}
 			],
 			"scriptLines": [
@@ -64,7 +70,34 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> CurCustomers",
-				"IngCustomer filter(ERROR_FUNCTION('')) ~> filter1"
+				"IngCustomer filter(isNull(UniqueCustomerNumber)) ~> FilterNullValues",
+				"FilterNullValues, CurCustomers join(IngCustomer@UniqueCustomerNumber == CurCustomers@UniqueCustomerNumber,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinIngestioAndCuration",
+				"joinIngestioAndCuration select(mapColumn(",
+				"          ING_CustomerDimId = IngCustomer@CustomerDimId,",
+				"          ING_UniqueCustomerNumber = IngCustomer@UniqueCustomerNumber,",
+				"          ING_CustomerName = IngCustomer@CustomerName,",
+				"          ING_Phone = IngCustomer@Phone,",
+				"          ING_Email = IngCustomer@Email,",
+				"          ING_BillingAddress = IngCustomer@BillingAddress,",
+				"          ING_BillingCity = IngCustomer@BillingCity,",
+				"          ING_BillingPostalCode = IngCustomer@BillingPostalCode,",
+				"          ING_BillingState = IngCustomer@BillingState,",
+				"          ING_BillingCountryName = IngCustomer@BillingCountryName,",
+				"          CUR_CustomerDimId = CurCustomers@CustomerDimId,",
+				"          CUR_UniqueCustomerNumber = CurCustomers@UniqueCustomerNumber,",
+				"          CUR_CustomerName = CurCustomers@CustomerName,",
+				"          CUR_Phone = CurCustomers@Phone,",
+				"          CUR_Email = CurCustomers@Email,",
+				"          CUR_BillingAddress = CurCustomers@BillingAddress,",
+				"          CUR_BillingCity = CurCustomers@BillingCity,",
+				"          CUR_BillingPostalCode = CurCustomers@BillingPostalCode,",
+				"          CUR_BillingState = CurCustomers@BillingState,",
+				"          CUR_BillingCountryName = CurCustomers@BillingCountryName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RenameColumns"
 			]
 		}
 	}
