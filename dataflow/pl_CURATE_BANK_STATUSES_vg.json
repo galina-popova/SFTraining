@@ -118,10 +118,15 @@
 				"     insertable:false,",
 				"     updateable:true,",
 				"     upsertable:false,",
+				"     keys:['CUR_BankStatusCode'],",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> updatedRecords"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          BankStatusCode = ING_BankStatusCode,",
+				"          BankStatusName = ING_BankStatusName",
+				"     )) ~> updatedRecords"
 			]
 		}
 	}
