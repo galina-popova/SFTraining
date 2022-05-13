@@ -58,6 +58,12 @@
 				},
 				{
 					"name": "AddCurRowSignature"
+				},
+				{
+					"name": "CompareSignatures"
+				},
+				{
+					"name": "addColumns2"
 				}
 			],
 			"scriptLines": [
@@ -159,6 +165,12 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectCurComparableColumns",
 				"selectCurComparableColumns derive(CUR_Signature = sha2(256,columns())) ~> AddCurRowSignature",
+				"AddingRowsSignature, AddCurRowSignature exists(ING_Signature == CUR_Signature,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> CompareSignatures",
+				"CompareSignatures derive(CUR_ValidFrom = currentUTC(),",
+				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
+				"          CUR_IsActive = 1) ~> addColumns2",
 				"addColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
