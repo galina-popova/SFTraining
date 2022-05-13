@@ -1,0 +1,56 @@
+{
+	"name": "pl_CURATE_BANK_STATUSES_vg",
+	"properties": {
+		"folder": {
+			"name": "curration"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_ingestion_BankStatuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "ingBankStatusesVg"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_curration_BankStatuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "CurBankStatusesVg"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "joinIngestionAndCuration"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> ingBankStatusesVg",
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurBankStatusesVg",
+				"ingBankStatusesVg, CurBankStatusesVg join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinIngestionAndCuration"
+			]
+		}
+	}
+}
