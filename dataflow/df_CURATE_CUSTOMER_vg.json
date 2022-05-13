@@ -35,7 +35,7 @@
 						"referenceName": "ds_curration_customer_vg",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "InsertUpdatedRecords"
 				}
 			],
 			"transformations": [
@@ -73,7 +73,7 @@
 					"name": "AddColumns2"
 				},
 				{
-					"name": "UpdateOldRecords"
+					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -177,10 +177,10 @@
 				"AddingRowsSignature, AddCurRowSignature exists(ING_Signature == CUR_Signature,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> CompareSignatures",
-				"UpdateOldRecords derive(CUR_ValidFrom = currentUTC(),",
+				"CompareSignatures derive(CUR_ValidFrom = currentUTC(),",
 				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
 				"          CUR_IsActive = 1) ~> AddColumns2",
-				"CompareSignatures alterRow(updateIf(true())) ~> UpdateOldRecords",
+				"CompareSignatures alterRow() ~> alterRow1",
 				"addColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -258,7 +258,7 @@
 				"          ValidFrom = CUR_ValidFrom,",
 				"          ValidTo = CUR_ValidTo,",
 				"          IsActive = CUR_IsActive",
-				"     )) ~> sink1"
+				"     )) ~> InsertUpdatedRecords"
 			]
 		}
 	}
