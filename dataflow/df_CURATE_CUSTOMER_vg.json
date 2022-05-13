@@ -35,7 +35,7 @@
 						"referenceName": "ds_curration_customer_vg",
 						"type": "DatasetReference"
 					},
-					"name": "InsertUpdatedRecords"
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -70,10 +70,7 @@
 					"name": "CompareSignatures"
 				},
 				{
-					"name": "addColumns2"
-				},
-				{
-					"name": "compareSignatures2"
+					"name": "AddColumns2"
 				}
 			],
 			"scriptLines": [
@@ -177,11 +174,9 @@
 				"AddingRowsSignature, AddCurRowSignature exists(ING_Signature == CUR_Signature,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> CompareSignatures",
-				"compareSignatures2 derive(CUR_ValidFrom = currentUTC(),",
+				"CompareSignatures derive(CUR_ValidFrom = currentUTC(),",
 				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
-				"          CUR_IsActive = 1) ~> addColumns2",
-				"CompareSignatures split(ERROR_FUNCTION(''),",
-				"     disjoint: false) ~> compareSignatures2@(, )",
+				"          CUR_IsActive = 1) ~> AddColumns2",
 				"addColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -221,7 +216,7 @@
 				"          ValidTo = CUR_ValidTo,",
 				"          IsActive = CUR_IsActive",
 				"     )) ~> InsertNewRecords",
-				"addColumns2 sink(allowSchemaDrift: true,",
+				"AddColumns2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          CustomerDimId as integer,",
@@ -259,7 +254,7 @@
 				"          ValidFrom = CUR_ValidFrom,",
 				"          ValidTo = CUR_ValidTo,",
 				"          IsActive = CUR_IsActive",
-				"     )) ~> InsertUpdatedRecords"
+				"     )) ~> sink1"
 			]
 		}
 	}
