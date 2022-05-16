@@ -190,7 +190,7 @@
 				"CompareSignatures derive(CUR_ValidFrom = currentUTC(),",
 				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
 				"          CUR_IsActive = 1) ~> AddColumns2",
-				"CompareSignatures alterRow() ~> UpdateOldRecords",
+				"CompareSignatures alterRow(updateIf(true)) ~> UpdateOldRecords",
 				"UpdateOldRecords derive(CUR_ValidTo = currentUTC(),",
 				"          IsActive = 0) ~> AddValidToAndFlag",
 				"addColumns sink(allowSchemaDrift: true,",
