@@ -22,7 +22,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "am",
+			"schema": "vg",
 			"table": "CustomerDim"
 		}
 	}
