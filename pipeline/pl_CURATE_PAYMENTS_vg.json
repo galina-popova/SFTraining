@@ -1,0 +1,33 @@
+{
+	"name": "pl_CURATE_PAYMENTS_vg",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Last Modified Date",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT CASE WHEN MAX(CreatedOn) IS NULL THEN '1900-01-01' ELSE MAX(CreatedOn) END as LastModifiedOn from [vg].[Payments]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_curration_payments_vg",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
