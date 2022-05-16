@@ -58,11 +58,11 @@
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
 							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.windowStartVg",
+								"value": "@pipeline().parameters.windowStart",
 								"type": "Expression"
 							},
 							"modifiedDatetimeEnd": {
-								"value": "@pipeline().parameters.windowEndVg",
+								"value": "@pipeline().parameters.windowEnd",
 								"type": "Expression"
 							},
 							"wildcardFileName": "*.json",
