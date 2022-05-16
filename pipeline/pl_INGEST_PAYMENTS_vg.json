@@ -212,11 +212,11 @@
 			}
 		],
 		"parameters": {
-			"windowStartVg": {
+			"windowStart": {
 				"type": "string",
 				"defaultValue": "2022-04-22"
 			},
-			"windowEndVg": {
+			"windowEnd": {
 				"type": "string",
 				"defaultValue": "2022-04-27"
 			}
