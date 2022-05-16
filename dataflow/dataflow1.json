@@ -1,0 +1,63 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"folder": {
+			"name": "Golden"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_curration_payments_vg",
+						"type": "DatasetReference"
+					},
+					"name": "CurPayments"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_golden_bank_statuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "GoldBankStatus"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "lkpBankStatus"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PaymentId as integer,",
+				"          PaymentIdentifier as string,",
+				"          UniqueCustomerNumber as string,",
+				"          BankStatusCode as string,",
+				"          PaymentStatusName as string,",
+				"          PaymentAmount as decimal(18,2),",
+				"          Deduction as decimal(18,2),",
+				"          PaymentDate as timestamp,",
+				"          CreatedOn as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurPayments",
+				"source(output(",
+				"          BankStatusId as integer,",
+				"          BankStatusCode as string,",
+				"          BankStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> GoldBankStatus",
+				"CurPayments, GoldBankStatus lookup(CurPayments@BankStatusCode == GoldBankStatus@BankStatusCode,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lkpBankStatus"
+			]
+		}
+	}
+}
