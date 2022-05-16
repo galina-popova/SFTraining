@@ -80,7 +80,7 @@
 					"name": "AddColumns2"
 				},
 				{
-					"name": "alterRow1"
+					"name": "UpdateOldRecords"
 				},
 				{
 					"name": "AddValidToAndFlag"
@@ -190,8 +190,8 @@
 				"CompareSignatures derive(CUR_ValidFrom = currentUTC(),",
 				"          CUR_ValidTo = toTimestamp('9999-12-31 00-00-00'),",
 				"          CUR_IsActive = 1) ~> AddColumns2",
-				"CompareSignatures alterRow() ~> alterRow1",
-				"alterRow1 derive(CUR_ValidTo = currentUTC(),",
+				"CompareSignatures alterRow() ~> UpdateOldRecords",
+				"UpdateOldRecords derive(CUR_ValidTo = currentUTC(),",
 				"          IsActive = 0) ~> AddValidToAndFlag",
 				"addColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
