@@ -3,12 +3,26 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Ingest Payments",
+				"name": "IngestPayments",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitOnCompletion": true
+					"pipeline": {
+						"referenceName": "pl_INGEST_PAYMENTS_vg",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"windowStart": {
+							"value": "@pipeline().parameters.windowStart",
+							"type": "Expression"
+						},
+						"windowEnd": {
+							"value": "@pipeline().parameters.windowEnd",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
