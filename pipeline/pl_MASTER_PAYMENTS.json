@@ -1,6 +1,17 @@
 {
 	"name": "pl_MASTER_PAYMENTS",
 	"properties": {
+		"activities": [
+			{
+				"name": "Ingest Payments",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitOnCompletion": true
+				}
+			}
+		],
 		"parameters": {
 			"windowStart": {
 				"type": "string"
