@@ -36,6 +36,12 @@
 				},
 				{
 					"name": "lkpPaymentStatus"
+				},
+				{
+					"name": "selectColumns"
+				},
+				{
+					"name": "AddAndCastColumns"
 				}
 			],
 			"scriptLines": [
@@ -78,7 +84,22 @@
 				"lkpBankStatus, GoldenPaymentStatus lookup(CurPayments@PaymentStatusName == GoldenPaymentStatus@PaymentStatusName,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lkpPaymentStatus"
+				"     broadcast: 'auto')~> lkpPaymentStatus",
+				"lkpPaymentStatus select(mapColumn(",
+				"          PaymentId,",
+				"          PaymentIdentifier,",
+				"          UniqueCustomerNumber,",
+				"          PaymentAmount,",
+				"          Deduction,",
+				"          PaymentDate,",
+				"          CreatedOn,",
+				"          PaymentStatusId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectColumns",
+				"selectColumns derive(ModifiedOn = currentUTC(),",
+				"          BankStatusId = toString(BankStatusId),",
+				"          PaymentStatusId = toString(PaymentStatusId)) ~> AddAndCastColumns"
 			]
 		}
 	}
