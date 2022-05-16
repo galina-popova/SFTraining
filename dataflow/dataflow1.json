@@ -20,12 +20,22 @@
 						"type": "DatasetReference"
 					},
 					"name": "GoldBankStatus"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_golden_payment_statuses_vg",
+						"type": "DatasetReference"
+					},
+					"name": "GoldenPaymentStatus"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
 					"name": "lkpBankStatus"
+				},
+				{
+					"name": "lkpPaymentStatus"
 				}
 			],
 			"scriptLines": [
@@ -53,10 +63,22 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> GoldBankStatus",
+				"source(output(",
+				"          PaymentStatusId as integer,",
+				"          PaymentStatusName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> GoldenPaymentStatus",
 				"CurPayments, GoldBankStatus lookup(CurPayments@BankStatusCode == GoldBankStatus@BankStatusCode,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lkpBankStatus"
+				"     broadcast: 'auto')~> lkpBankStatus",
+				"lkpBankStatus, GoldenPaymentStatus lookup(CurPayments@PaymentStatusName == GoldenPaymentStatus@PaymentStatusName,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lkpPaymentStatus"
 			]
 		}
 	}
