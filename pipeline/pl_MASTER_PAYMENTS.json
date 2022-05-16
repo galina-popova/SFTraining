@@ -24,6 +24,26 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "CuratePayments",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "IngestPayments",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_CURATE_PAYMENTS_vg",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"parameters": {
