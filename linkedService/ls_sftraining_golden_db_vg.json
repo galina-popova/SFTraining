@@ -1,0 +1,18 @@
+{
+	"name": "ls_sftraining_golden_db_vg",
+	"properties": {
+		"description": "Linked service to golden db",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "vg_AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "goldenDB-connectionString"
+			}
+		}
+	}
+}
