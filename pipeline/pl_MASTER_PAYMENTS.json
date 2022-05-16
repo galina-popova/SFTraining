@@ -1,0 +1,14 @@
+{
+	"name": "pl_MASTER_PAYMENTS",
+	"properties": {
+		"parameters": {
+			"windowStart": {
+				"type": "string"
+			},
+			"windowEnd": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
