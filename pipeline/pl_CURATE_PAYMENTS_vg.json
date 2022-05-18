@@ -49,7 +49,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT *\nFROM vg.Payments\nWHERE 1=1\nAND LastModifiedOn > '@{activity('Get Last Modified Date').output.firstRow.CreatedOn}'",
+						"sqlReaderQuery": "SELECT *\nFROM vg.Payments\nWHERE 1=1\nAND LastModifiedOn > '@{activity('Get Last Modified Date').output.firstRow.LastModifiedOn}'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
