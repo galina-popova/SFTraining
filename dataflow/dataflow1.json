@@ -29,7 +29,15 @@
 					"name": "GoldenPaymentStatus"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_golden_payments_vg",
+						"type": "DatasetReference"
+					},
+					"name": "GoldenPayments"
+				}
+			],
 			"transformations": [
 				{
 					"name": "lkpBankStatus"
@@ -42,6 +50,9 @@
 				},
 				{
 					"name": "AddAndCastColumns"
+				},
+				{
+					"name": "UpdateOrInsert"
 				}
 			],
 			"scriptLines": [
@@ -99,7 +110,42 @@
 				"     skipDuplicateMapOutputs: true) ~> selectColumns",
 				"selectColumns derive(ModifiedOn = currentUTC(),",
 				"          BankStatusId = toString(BankStatusId),",
-				"          PaymentStatusId = toString(PaymentStatusId)) ~> AddAndCastColumns"
+				"          PaymentStatusId = toString(PaymentStatusId)) ~> AddAndCastColumns",
+				"AddAndCastColumns alterRow(upsertIf(true())) ~> UpdateOrInsert",
+				"UpdateOrInsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PaymentId as integer,",
+				"          PaymentIdentifier as string,",
+				"          UniqueCustomerNumber as string,",
+				"          BankStatusId as string,",
+				"          PaymentStatusId as string,",
+				"          PaymentAmount as decimal(18,2),",
+				"          Deduction as decimal(18,2),",
+				"          PaymentDate as timestamp,",
+				"          CreatedOn as timestamp,",
+				"          ModifiedOn as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['PaymentIdentifier'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PaymentIdentifier,",
+				"          UniqueCustomerNumber,",
+				"          BankStatusId,",
+				"          PaymentStatusId,",
+				"          PaymentAmount,",
+				"          Deduction,",
+				"          PaymentDate,",
+				"          CreatedOn,",
+				"          ModifiedOn",
+				"     )) ~> GoldenPayments"
 			]
 		}
 	}
