@@ -45,6 +45,19 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "Golden Customers",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_GOLDEN_CUSTOMERS_vg",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"annotations": []
