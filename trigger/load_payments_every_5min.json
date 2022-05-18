@@ -2,7 +2,7 @@
 	"name": "load_payments_every_5min",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "pl_MASTER_PAYMENTS_vg",
