@@ -1,0 +1,17 @@
+{
+	"name": "df_cur_paymentStatuses",
+	"properties": {
+		"folder": {
+			"name": "curation"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				""
+			]
+		}
+	}
+}
