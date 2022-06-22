@@ -1,0 +1,79 @@
+{
+	"name": "df_cur_customer",
+	"properties": {
+		"folder": {
+			"name": "curation"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_CustomerDim_Table",
+						"type": "DatasetReference"
+					},
+					"name": "IngCustomerDim"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_cur_customerDim",
+						"type": "DatasetReference"
+					},
+					"name": "CurConsumerDim"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "FilterNullValues"
+				},
+				{
+					"name": "LeftJoinIngCurCust"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> IngCustomerDim",
+				"source(output(",
+				"          CustomerDimId as integer,",
+				"          UniqueCustomerNumber as string,",
+				"          CustomerName as string,",
+				"          Phone as string,",
+				"          Email as string,",
+				"          BillingAddress as string,",
+				"          BillingCity as string,",
+				"          BillingPostalCode as string,",
+				"          BillingState as string,",
+				"          BillingCountryName as string,",
+				"          ValidFrom as timestamp,",
+				"          ValidTo as timestamp,",
+				"          IsActive as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CurConsumerDim",
+				"IngCustomerDim filter(isNull(UniqueCustomerNumber)) ~> FilterNullValues",
+				"FilterNullValues, CurConsumerDim join(IngCustomerDim@UniqueCustomerNumber == CurConsumerDim@UniqueCustomerNumber,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> LeftJoinIngCurCust"
+			]
+		}
+	}
+}
