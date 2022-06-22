@@ -125,7 +125,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> CurConsumerDim",
-				"IngCustomerDim filter(isNull(UniqueCustomerNumber)) ~> FilterNullValues",
+				"IngCustomerDim filter(!isNull(UniqueCustomerNumber)) ~> FilterNullValues",
 				"FilterNullValues, CurConsumerDim join(IngCustomerDim@UniqueCustomerNumber == CurConsumerDim@UniqueCustomerNumber,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
