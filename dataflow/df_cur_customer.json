@@ -223,7 +223,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          UniqueCustomerNumber = ING_CustomerDimId,",
+				"          UniqueCustomerNumber = ING_UniqueCustomerNumber,",
 				"          CustomerName = ING_CustomerName,",
 				"          Phone = ING_Phone,",
 				"          Email = ING_Email,",
