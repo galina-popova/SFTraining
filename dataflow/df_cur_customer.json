@@ -177,7 +177,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectOnlyNeededColumns",
-				"SelectOnlyNeededColumns derive(ING_signature = sha2(256, ING_UniqueCustomerNumber,ING_CustomerName,ING_Phone,ING_Email,ING_BillingAddress,ING_BillingCity,ING_BillingPostalCode,ING_BillingPostalCode,ING_BillingState,ING_BillingCountryName)) ~> CalculateIngHash",
+				"SelectOnlyNeededColumns derive(ING_signature = sha2(256, ING_UniqueCustomerNumber,ING_CustomerName,ING_Phone,ING_Email,ING_BillingAddress,ING_BillingCity,ING_BillingPostalCode,ING_BillingState,ING_BillingCountryName)) ~> CalculateIngHash",
 				"CurConsumerDim derive(CUR_signature = sha2(256,UniqueCustomerNumber,CustomerName,Phone,Email,BillingAddress,BillingCity,BillingPostalCode,BillingState,BillingCountryName)) ~> CalculateCurHash",
 				"SplitExistingRows@ChangedRecords derive(ING_ValidityFrom = currentTimestamp(),",
 				"          ING_ValidityTo = toTimestamp('2050-12-31 23:59:59'),",
