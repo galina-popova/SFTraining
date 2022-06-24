@@ -74,19 +74,13 @@
 					"name": "AddDynamicColumn"
 				},
 				{
-					"name": "GetCurHashValue"
-				},
-				{
-					"name": "FullJoinSignatures"
-				},
-				{
-					"name": "SplitExistingRows"
-				},
-				{
 					"name": "AlterUncahngedRows"
 				},
 				{
 					"name": "AddDynamicStamps"
+				},
+				{
+					"name": "CompareHashValuew"
 				}
 			],
 			"scriptLines": [
@@ -179,24 +173,15 @@
 				"     skipDuplicateMapOutputs: true) ~> SelectOnlyNeededColumns",
 				"SelectOnlyNeededColumns derive(ING_signature = sha2(256, ING_UniqueCustomerNumber,ING_CustomerName,ING_Phone,ING_Email,ING_BillingAddress,ING_BillingCity,ING_BillingPostalCode,ING_BillingState,ING_BillingCountryName)) ~> CalculateIngHash",
 				"CurConsumerDim derive(CUR_signature = sha2(256,UniqueCustomerNumber,CustomerName,Phone,Email,BillingAddress,BillingCity,BillingPostalCode,BillingState,BillingCountryName)) ~> CalculateCurHash",
-				"SplitExistingRows@ChangedRecords derive(ING_ValidityFrom = currentTimestamp(),",
+				"CompareHashValuew derive(ING_ValidityFrom = currentTimestamp(),",
 				"          ING_ValidityTo = toTimestamp('2050-12-31 23:59:59'),",
 				"          ING_IsActive = true()) ~> AddDynamicColumn",
-				"CalculateCurHash select(mapColumn(",
-				"          CUR_signature",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> GetCurHashValue",
-				"CalculateIngHash, GetCurHashValue join(ING_signature == CUR_signature,",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> FullJoinSignatures",
-				"FullJoinSignatures split(ING_signature==CUR_signature,",
-				"     disjoint: false) ~> SplitExistingRows@(NoChangedRecords, ChangedRecords)",
-				"SplitExistingRows@NoChangedRecords alterRow(updateIf(ING_signature==CUR_signature)) ~> AlterUncahngedRows",
+				"CompareHashValuew alterRow(updateIf(true())) ~> AlterUncahngedRows",
 				"AlterUncahngedRows derive(ING_ValidTo = currentTimestamp(),",
 				"          ING_IsActive = false()) ~> AddDynamicStamps",
+				"CalculateIngHash, CalculateCurHash exists(ING_signature == CUR_signature,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> CompareHashValuew",
 				"AddVirtualColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
