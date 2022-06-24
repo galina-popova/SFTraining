@@ -188,7 +188,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> GetCurHashValue",
 				"CalculateIngHash, GetCurHashValue join(ING_signature == CUR_signature,",
-				"     joinType:'outer',",
+				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> FullJoinSignatures",
